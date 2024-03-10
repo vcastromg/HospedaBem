@@ -33,5 +33,6 @@ Um sistema web para agendamento de hospedagem em hoteis.
 
 ## Tecnologias
 
-- .NET
-- Postgre
+- Back-end: C#
+- Front-end: C#
+- Banco de dados: PostgreSQL
