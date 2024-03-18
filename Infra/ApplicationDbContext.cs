@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace HexagonalArchitecture.Data;
+namespace Infra;
 
 public class ApplicationDbContext : IdentityDbContext
 {

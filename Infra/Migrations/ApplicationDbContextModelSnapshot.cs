@@ -2,6 +2,7 @@
 
 using System;
 using HexagonalArchitecture.Data;
+using Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
