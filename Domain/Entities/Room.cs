@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities;
 
-public class Room
+public class Room: BaseEntity
 {
     public string Name { get; set; }
     public ushort GuestsCapacity { get; set; }

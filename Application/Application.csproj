@@ -11,6 +11,11 @@
     <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\DTOs\DTOs.csproj" />
+      <ProjectReference Include="..\Infra\Infra.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Implementations\" />
     </ItemGroup>
 
 </Project>

@@ -14,4 +14,5 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Hotel> Hotels { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<Room> Rooms { get; set; }
+    public DbSet<AppUser> Users { get; set; }
 }

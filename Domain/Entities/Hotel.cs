@@ -1,8 +1,7 @@
 ﻿namespace Domain.Entities;
 
-public class Hotel
+public class Hotel: BaseEntity
 {
-    public long Id { get; set; }
     public string Name { get; set; }
     public string Address { get; set; }
     public double Latitude { get; set; }
