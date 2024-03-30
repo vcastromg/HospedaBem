@@ -1,3 +1,7 @@
+using Application.Repositories;
+using Application.Services;
+using Application.Services.Implementations;
+using Domain.Repositories.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Infra;
@@ -10,11 +14,17 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(
+        options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
+builder.Services.AddScoped<HotelService, HotelServiceImp>();
 
 var app = builder.Build();
 
