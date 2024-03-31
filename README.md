@@ -50,21 +50,20 @@ Um sistema web para agendamento de hospedagem em hoteis.
 8. Como viajante, gostaria de editar e deletar minhas avaliações de minhas hospedagens.
 9. Como viajante, gostaria de me cadastrar no sistema e ter uma página de perfil.
 10. Como viajante, gostaria de editar e deletar meu perfil no sistema.
-11. Como gerente de um hotel, gostaria de cadastrar minha acomodação no sistema.
-12. Como gerente de um hotel, gostaria de me cadastar no sistema e ter uma página de hospedagem no sistema.
-13. Como gerente de um hotel, gostaria de editar e deletar minha página de hospedagem no sistema.
-14. Como gerente de um hotel, gostaria de responder as dúvidas que clientes possam ter.
-15. Como gerente de um hotel, gostaria de responder as avaliações que clientes façam sobre minhas acomodações
-16. Como gerente de um hotel, gostaria de visualizar as reservas feitas em minhas acomodações
-17. Como gerente de um hotel, gostaria de apresentar minhas políticas de hospedagem
-18. Como gerente de um hotel, gostaria de editar/deletar minhas políticas de hospedagem
+11. Como gerente de um hotel, gostaria de me cadastar no sistema e ter uma página de hospedagem no sistema.
+12. Como gerente de um hotel, gostaria de editar e deletar minha página de hospedagem no sistema.
+13. Como gerente de um hotel, gostaria de responder as dúvidas que clientes possam ter.
+14. Como gerente de um hotel, gostaria de responder as avaliações que clientes façam sobre minhas acomodações
+15. Como gerente de um hotel, gostaria de visualizar as reservas feitas em minhas acomodações
+16. Como gerente de um hotel, gostaria de apresentar minhas políticas de hospedagem
+17. Como gerente de um hotel, gostaria de editar/deletar minhas políticas de hospedagem
 
 ## Backlog da sprint
 
 **História #1:** Como viajante, gostaria de pesquisar acomodações disponíveis em um hotel. <br>
 **Tarefas e responsáveis:**
 - Criar esqueleto do projeto utilizando .Net
-- Esboço de um diagrama ER para melhor entendimento no backend
+- Esboço de um diagrama ER para melhor entendimento no backend [Lucas]
 - Configurar banco de dados sqlite.
 - Criar classes de domínio para Hotel, Room, Booking e Guest, e instanciar as tabelas referentes
 - Criar e testar primeira rota usando Asp.Net
@@ -74,26 +73,46 @@ Um sistema web para agendamento de hospedagem em hoteis.
 
 **História #2:** Como viajante, gostaria de pesquisar acomodações disponíveis em um certo intervalo de dias. <br>
 **Tarefas e responsáveis:**
-- Criar consulta de quartos disponíveis para certo intervalo de dias
-- Configurar rota de consulta de acomodações para receber filtro de dias
+- Criar consulta de quartos disponíveis para certo intervalo de dias [Lucas]
+- Configurar rota de consulta de acomodações para receber filtro de dias [Lucas]
 - Ajustar tela de usuário feita por usuário para apresentar nova lista filtrada de acomodações
   
 **História #3:** Como viajante, gostaria de pesquisar acomodações disponíveis em uma cidade. <br>
 **Tarefas e responsáveis:**
-- Implementar no backend lógica de consulta filtrada por certa localidade
-- Configurar rota de consulta de acomodações para receber filtro de localidade
+- Implementar no backend lógica de consulta filtrada por certa localidade [Lucas]
+- Configurar rota de consulta de acomodações para receber filtro de localidade [Lucas]
 - Adaptar tela de consulta feita por usuário para apresentar acomodações seguindo nova filtragem
 
 **História #4:** Como viajante, gostaria de reservar uma acomodação em um hotel. <br>
 **Tarefas e responsáveis:**
-- Criar lógica de vincular um usuário para uma reserva de determinada acomodação, verificando disponibilidade
-- Criar uma rota do tipo Post para permitir a reserva
+- Criar lógica de vincular um usuário para uma reserva de determinada acomodação, verificando disponibilidade [Lucas]
+- Criar uma rota do tipo Post para permitir a reserva [Lucas]
 - Adaptar tela de consulta de acomdações, apresentando botão para reservar.
 
 **História #5:** Como viajante, gostaria de editar e cancelar uma acomodação já reservada. <br>
 **Tarefas e responsáveis:**
-- Criar lógica no backend que permita edição de data/horário de uma reserva para outra que esteja disponível
+- Criar lógica no backend que permita edição de data/horário de uma reserva para outra que esteja disponível [Lucas]
 - Criar lógica no backend que permita a deleção de uma determinada reserva feita pelo usuário
 - Criar tela que lista as reservas feitas pelo usuário
 - Adaptar tela de listagem de reservas para apresentar opção de editar reserva e opção de deletar reserva
+
+**História #6:** Como gerente de um hotel, gostaria de me cadastar no sistema e ter uma página de hospedagem no sistema. <br>
+**Tarefas e responsáveis:**
+- Verificar e ajustar tabela no banco de dados para que fique de acordo com a entidade Hotel e Quarto [Lucas]
+- Criar lógica no backend que permita o cadastro de novo hotel no sistema.
+- Criar nova rota que permita o usuário se cadastar novo hotel.
+- Implementar tela que permita usuário cadastar seu hotel no sistema.
+
+**História #7:** Como gerente de um hotel, gostaria de editar e deletar minha página de hospedagem no sistema. <br>
+- Criar lógica no backend que permita edição de informações a respeito do hotel previamente cadastrado no sistema
+- Criar lógica no backend que permita deleção de um hotel no sistema.
+- Desenvolver nova rota que permita edição/deleção de um hotel para o frontend.
+- Implementar tela de edição de informações de um hotel
+- Implementar tela de confirmação de deleção de hotel do sistema
+
+**História #8:** Como gerente de um hotel, gostaria de visualizar as reservas feitas em minhas acomodações <br>
+- Implementar lógica que permita listar as reservas feitas no hotel administrado pelo gerente
+- Desenvolver rota que permita frontend ter acesso a listagem de acomodações
+- Implementar tela que permita visualização das reservas feitas
+  
   
