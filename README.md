@@ -67,7 +67,7 @@ Um sistema web para agendamento de hospedagem em hoteis.
 - Configurar banco de dados sqlite.
 - Criar classes de domínio para Hotel, Room, Booking e Guest, e instanciar as tabelas referentes
 - Criar e testar primeira rota usando Asp.Net
-- Implementar no backend a lógica de pesquisar e listar acomodações disponíveis de um hotel
+- Implementar no backend a lógica de pesquisar e listar acomodações disponíveis de um hotel [Andre]
 - Desenvolver tela principal de usuário para pesquisar acomodações
 - Ajustar tela de usuário para apresentar a lista de acomodações
 
@@ -92,26 +92,26 @@ Um sistema web para agendamento de hospedagem em hoteis.
 **História #5:** Como viajante, gostaria de editar e cancelar uma acomodação já reservada. <br>
 **Tarefas e responsáveis:**
 - Criar lógica no backend que permita edição de data/horário de uma reserva para outra que esteja disponível [Lucas]
-- Criar lógica no backend que permita a deleção de uma determinada reserva feita pelo usuário
+- Criar lógica no backend que permita a deleção de uma determinada reserva feita pelo usuário [Andre]
 - Criar tela que lista as reservas feitas pelo usuário
 - Adaptar tela de listagem de reservas para apresentar opção de editar reserva e opção de deletar reserva
 
 **História #6:** Como gerente de um hotel, gostaria de me cadastar no sistema e ter uma página de hospedagem no sistema. <br>
 **Tarefas e responsáveis:**
 - Verificar e ajustar tabela no banco de dados para que fique de acordo com a entidade Hotel e Quarto [Lucas]
-- Criar lógica no backend que permita o cadastro de novo hotel no sistema.
+- Criar lógica no backend que permita o cadastro de novo hotel no sistema. [Andre]
 - Criar nova rota que permita o usuário se cadastar novo hotel.
 - Implementar tela que permita usuário cadastar seu hotel no sistema.
 
 **História #7:** Como gerente de um hotel, gostaria de editar e deletar minha página de hospedagem no sistema. <br>
-- Criar lógica no backend que permita edição de informações a respeito do hotel previamente cadastrado no sistema
-- Criar lógica no backend que permita deleção de um hotel no sistema.
+- Criar lógica no backend que permita edição de informações a respeito do hotel previamente cadastrado no sistema [Andre]
+- Criar lógica no backend que permita deleção de um hotel no sistema. [Andre]
 - Desenvolver nova rota que permita edição/deleção de um hotel para o frontend.
 - Implementar tela de edição de informações de um hotel
 - Implementar tela de confirmação de deleção de hotel do sistema
 
 **História #8:** Como gerente de um hotel, gostaria de visualizar as reservas feitas em minhas acomodações <br>
-- Implementar lógica que permita listar as reservas feitas no hotel administrado pelo gerente
+- Implementar lógica que permita listar as reservas feitas no hotel administrado pelo gerente [Andre]
 - Desenvolver rota que permita frontend ter acesso a listagem de acomodações
 - Implementar tela que permita visualização das reservas feitas
   
