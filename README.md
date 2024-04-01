@@ -33,9 +33,9 @@ Um sistema web para agendamento de hospedagem em hoteis.
 
 ## Tecnologias
 
-- Back-end: C#
-- Front-end: C#
-- Banco de dados: PostgreSQL
+- Back-end: .NET 7
+- Front-end: .NET Razor
+- Banco de dados: SQLite
 
 ## Backlog do produto
 1. Como viajante, gostaria de pesquisar acomodações disponíveis em um hotel.
