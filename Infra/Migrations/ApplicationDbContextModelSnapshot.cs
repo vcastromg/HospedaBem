@@ -17,7 +17,7 @@ namespace HexagonalArchitecture.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
 
-            modelBuilder.Entity("Domain.Entities.Booking", b =>
+            modelBuilder.Entity("Entities.Entities.Booking", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +54,7 @@ namespace HexagonalArchitecture.Data.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Hotel", b =>
+            modelBuilder.Entity("Entities.Entities.Hotel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace HexagonalArchitecture.Data.Migrations
                     b.ToTable("Hotels");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Review", b =>
+            modelBuilder.Entity("Entities.Entities.Review", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +123,7 @@ namespace HexagonalArchitecture.Data.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Room", b =>
+            modelBuilder.Entity("Entities.Entities.Room", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -360,22 +360,22 @@ namespace HexagonalArchitecture.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.AppUser", b =>
+            modelBuilder.Entity("Entities.Entities.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Booking", b =>
+            modelBuilder.Entity("Entities.Entities.Booking", b =>
                 {
-                    b.HasOne("Domain.Entities.Room", "Room")
+                    b.HasOne("Entities.Entities.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.AppUser", "User")
+                    b.HasOne("Entities.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
@@ -384,15 +384,15 @@ namespace HexagonalArchitecture.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Review", b =>
+            modelBuilder.Entity("Entities.Entities.Review", b =>
                 {
-                    b.HasOne("Domain.Entities.Booking", "Booking")
+                    b.HasOne("Entities.Entities.Booking", "Booking")
                         .WithMany()
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.AppUser", "User")
+                    b.HasOne("Entities.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
@@ -401,9 +401,9 @@ namespace HexagonalArchitecture.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Room", b =>
+            modelBuilder.Entity("Entities.Entities.Room", b =>
                 {
-                    b.HasOne("Domain.Entities.Hotel", "Hotel")
+                    b.HasOne("Entities.Entities.Hotel", "Hotel")
                         .WithMany("Rooms")
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -463,7 +463,7 @@ namespace HexagonalArchitecture.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Hotel", b =>
+            modelBuilder.Entity("Entities.Entities.Hotel", b =>
                 {
                     b.Navigation("Rooms");
                 });

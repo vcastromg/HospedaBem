@@ -1,4 +1,4 @@
-﻿using Application.Repositories;
+﻿using Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Implementations;

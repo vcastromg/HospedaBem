@@ -1,8 +1,6 @@
-﻿using Application.Repositories;
-using Domain.Entities;
-using Infra;
+﻿using Domain.Entities;
 
-namespace Domain.Repositories.Implementations;
+namespace Infra.Repositories.Implementations;
 
 public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
 {
