@@ -22,6 +22,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
 builder.Services.AddScoped<HotelService, HotelServiceImp>();
@@ -48,6 +50,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
