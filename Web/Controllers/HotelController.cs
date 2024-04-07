@@ -1,19 +1,32 @@
-﻿using Domain.Entities;
+﻿using Application.Services;
+using Application.Services.Implementations;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HexagonalArchitecture.Controllers;
 
 [ApiController]
-[Route("/api")]
 [Route("/api/hotel")]
 public class HotelController : ControllerBase
 {
-    [HttpGet]
-    public List<Hotel> listHotels()
-    {
-        Hotel h1 = new Hotel("Hotel1", "address", 4234.32, 4324.32, null);
-        Hotel h2 = new Hotel();
+    private readonly HotelService _hotelService;
 
-        return new List<Hotel>() { h1, h2 };
+    public HotelController(HotelService hotelService)
+    {
+        _hotelService = hotelService;
+    }
+
+    [HttpGet]
+    public IActionResult  ListHotels()
+    {
+        return Ok(_hotelService.GetAllHotels());
+    }
+
+    [HttpPost]
+    [Route("/api/hotel")]
+    public CreatedResult RegisterHotel(Hotel hotel)
+    {
+        _hotelService.RegisterHotel(hotel);
+        return Created();
     }
 }
