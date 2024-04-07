@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories.Implementations;
 
@@ -8,5 +9,14 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
     public HotelRepositoryImp(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;
+    }
+
+    public ICollection<string> GetLastRegisteredHotelNames()
+    {
+        return Query()
+            .AsNoTracking()
+            .OrderByDescending(q => q.CreatedAt)
+            .Select(q => q.Name)
+            .ToList();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Infra.Repositories;
+﻿using Domain.Entities;
+using Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Implementations;
@@ -11,14 +12,20 @@ public class HotelServiceImp : HotelService
     {
         _hotelRepository = hotelRepository;
     }
+
+    public IEnumerable<Hotel> GetAllHotels()
+    {
+        return _hotelRepository.GetAll();
+    }
     
     public ICollection<string> GetLastRegisteredHotelNames()
     {
-        return _hotelRepository
-            .Query()
-            .AsNoTracking()
-            .OrderByDescending(q => q.CreatedAt)
-            .Select(q => q.Name)
-            .ToList();
+        return _hotelRepository.GetLastRegisteredHotelNames();
+    }
+
+    public void RegisterHotel(Hotel hotel)
+    {
+        var newHotel = new Hotel(hotel.Name, hotel.Address, hotel.Latitude, hotel.Longitude, new List<Room>());
+        _hotelRepository.Add(newHotel);
     }
 }
