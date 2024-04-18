@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <OutputType>Library</OutputType>
         <LangVersion>12</LangVersion>
+        <RootNamespace>Domain</RootNamespace>
     </PropertyGroup>
 
 </Project>
