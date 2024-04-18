@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +10,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
+    public DbSet<Address> Addresses { get; set; }
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<Hotel> Hotels { get; set; }
     public DbSet<Review> Reviews { get; set; }

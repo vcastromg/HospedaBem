@@ -1,4 +1,5 @@
 ﻿using Application.Repositories;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Implementations;
@@ -11,8 +12,13 @@ public class HotelServiceImp : HotelService
     {
         _hotelRepository = hotelRepository;
     }
-    
-    public ICollection<string> GetLastRegisteredHotelNames()
+
+    public IEnumerable<Room> GetRoomsByHotelId(long hotelId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<string> GetLastRegisteredHotelNames()
     {
         return _hotelRepository
             .Query()

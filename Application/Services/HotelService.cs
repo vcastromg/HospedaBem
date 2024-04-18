@@ -1,6 +1,9 @@
-﻿namespace Application.Services;
+﻿using Domain;
+
+namespace Application.Services;
 
 public interface HotelService
 {
-    ICollection<string> GetLastRegisteredHotelNames();
+    IEnumerable<Room> GetRoomsByHotelId(long hotelId);
+    IEnumerable<string> GetLastRegisteredHotelNames();
 }

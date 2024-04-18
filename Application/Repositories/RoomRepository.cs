@@ -3,6 +3,6 @@ using Domain.Repositories;
 
 namespace Application.Repositories;
 
-public interface HotelRepository: BaseRepository<Hotel>
+public interface RoomRepository: BaseRepository<Room>
 {
 }

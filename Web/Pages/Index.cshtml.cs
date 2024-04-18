@@ -9,7 +9,7 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private readonly HotelService _hotelService;
     
-    public ICollection<string> LastHotels;
+    public IEnumerable<string> LastHotels;
 
     public IndexModel(ILogger<IndexModel> logger, HotelService hotelService)
     {

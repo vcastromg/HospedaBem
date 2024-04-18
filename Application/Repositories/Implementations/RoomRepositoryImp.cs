@@ -3,10 +3,10 @@ using Infra;
 
 namespace Domain.Repositories.Implementations;
 
-public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
+public class RoomRepositoryImp : BaseRepositoryImp<Room>, RoomRepository
 {
     private readonly ApplicationDbContext _applicationDbContext;
-    public HotelRepositoryImp(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+    public RoomRepositoryImp(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;
     }

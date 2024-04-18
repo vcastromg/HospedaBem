@@ -46,6 +46,6 @@ public class BaseRepositoryImp<T>: BaseRepository<T> where T: class
 
     public IQueryable<T> Query()
     {
-        return _table.AsQueryable();
+        return _table.AsNoTracking().AsQueryable();
     }
 }
