@@ -1,5 +1,7 @@
 using Application.Services;
 using Application.Services.Implementations;
+using DataGeneration;
+using DataGeneration.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Infra;
@@ -25,8 +27,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddScoped<RoomRepository, RoomRepositoryImp>();
+builder.Services.AddScoped<RoomService, RoomServiceImp>();
 builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
 builder.Services.AddScoped<HotelService, HotelServiceImp>();
+builder.Services.AddScoped<Generator, GeneratorImp>();
 
 var app = builder.Build();
 
