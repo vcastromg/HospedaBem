@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Domain.Entities;
+﻿namespace Domain.Entities;
 
 public class BaseEntity
 {
