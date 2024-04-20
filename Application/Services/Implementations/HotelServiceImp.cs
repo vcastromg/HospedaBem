@@ -25,7 +25,12 @@ public class HotelServiceImp : HotelService
 
     public void RegisterHotel(Hotel hotel)
     {
-        var newHotel = new Hotel(hotel.Name, hotel.Address, hotel.Latitude, hotel.Longitude, new List<Room>());
+        var newHotel = new Hotel(hotel.Name, new List<Room>());
         _hotelRepository.Add(newHotel);
+    }
+
+    public IEnumerable<Hotel> GetRoomsByHotelId(long hotelId)
+    {
+        throw new NotImplementedException();
     }
 }
