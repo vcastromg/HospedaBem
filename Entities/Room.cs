@@ -2,7 +2,7 @@
 
 public class Room: BaseEntity
 {
-    public string Name { get; set; }
+    public ushort Number { get; set; }
     public ushort GuestsCapacity { get; set; }
     public bool IsAvailable { get; set; }
     public double Price { get; set; }
