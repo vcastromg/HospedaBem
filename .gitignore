@@ -478,3 +478,6 @@ $RECYCLE.BIN/
 
 # Intellij
 .idea
+
+# DB
+Web/app.db

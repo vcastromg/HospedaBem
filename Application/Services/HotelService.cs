@@ -1,9 +1,10 @@
-﻿using Domain;
+﻿using Domain.Entities;
 
 namespace Application.Services;
 
 public interface HotelService
 {
-    IEnumerable<Room> GetRoomsByHotelId(long hotelId);
-    IEnumerable<string> GetLastRegisteredHotelNames();
+    IEnumerable<Hotel> GetAllHotels();
+    ICollection<string> GetLastRegisteredHotelNames();
+    void RegisterHotel(Hotel hotel);
 }

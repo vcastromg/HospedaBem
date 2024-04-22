@@ -1,4 +1,4 @@
-﻿namespace Domain.Repositories;
+﻿namespace Infra.Repositories;
 
 public interface BaseRepository<T> where T: class
 {

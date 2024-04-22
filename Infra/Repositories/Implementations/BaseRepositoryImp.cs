@@ -1,7 +1,6 @@
-﻿using Infra;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Repositories.Implementations;
+namespace Infra.Repositories.Implementations;
 
 public class BaseRepositoryImp<T>: BaseRepository<T> where T: class
 {
