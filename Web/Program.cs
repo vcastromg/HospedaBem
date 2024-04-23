@@ -33,6 +33,8 @@ builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
 builder.Services.AddScoped<HotelService, HotelServiceImp>();
 builder.Services.AddScoped<Generator, GeneratorImp>();
 
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,7 +56,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+// app.MapRazorPages();
 
 app.MapControllers();
 
@@ -63,5 +65,8 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     db.Database.Migrate();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
