@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Infra.Repositories;
+namespace Application.Repositories;
 
 public interface HotelRepository: BaseRepository<Hotel>
 {

@@ -1,3 +1,4 @@
+using Application.Repositories;
 using Application.Services;
 using Application.Services.Implementations;
 using DataGeneration;
@@ -5,7 +6,6 @@ using DataGeneration.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Infra;
-using Infra.Repositories;
 using Infra.Repositories.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);

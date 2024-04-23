@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Repositories;
+using Domain.Entities;
 using DTOs;
-using Infra.Repositories;
 
 namespace Application.Services.Implementations;
 

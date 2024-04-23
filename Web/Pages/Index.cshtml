@@ -5,7 +5,27 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">HospedaBem</h1>
+    <form>
+        <div class="row">
+            <div class="col-sm-12 col-lg-4 mt-3">
+                <label for="city" class="form-label">Cidade</label>
+                <input class="form-control" id="city" aria-describedby="cityHelp">
+                <div id="cityHelp" class="form-text">Escolha um destino.</div>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="checkin" class="form-label">Check-in</label>
+                <input type="date" class="form-control" id="checkin" aria-describedby="checkinHelp">
+                <div id="checkinHelp" class="form-text">A data que você deseja iniciar sua estadia.</div>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="checkout" class="form-label">Check-out</label>
+                <input type="date" class="form-control" id="checkout" aria-describedby="checkoutHelp">
+                <div id="checkoutHelp" class="form-text">A data que você deseja finalizar sua estadia.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Buscar</button>
+    </form>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>Last hotels: @String.Join(", ", Model.LastHotels)</p>
 </div>
