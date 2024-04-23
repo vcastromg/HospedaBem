@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Repositories;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories.Implementations;

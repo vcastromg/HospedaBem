@@ -1,4 +1,4 @@
-﻿namespace Infra.Repositories;
+﻿namespace Application.Repositories;
 
 public interface BaseRepository<T> where T: class
 {

@@ -1,5 +1,6 @@
-﻿using Application.Services;
-using Application.Services.Implementations;
+﻿
+
+using Application.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,13 @@ public class HotelController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult  ListHotels()
+    public IActionResult Index()
+    {
+        return Ok(_hotelService.GetAllHotels());
+    }
+
+    [HttpGet("ListHotels")]
+    public IActionResult ListHotels()
     {
         return Ok(_hotelService.GetAllHotels());
     }

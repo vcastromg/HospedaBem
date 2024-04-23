@@ -1,7 +1,6 @@
 ﻿using Application.Repositories;
-using Domain;
+using Domain.Entities;
 using DTOs;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Implementations;
 
@@ -14,34 +13,29 @@ public class RoomServiceImp : RoomService
         _roomRepository = roomRepository;
     }
 
-    public IEnumerable<Room> SearchRooms(RoomSearchDTO search)
+    public IEnumerable<Room> Search(RoomSearchDTO dto)
     {
-        var query = _roomRepository
-            .Query()
-            .Include(q => q.Hotel)
-            .ThenInclude(q => q.Address)
-            .AsQueryable();
-        
-        if (search.CityName != null)
+        var query = _roomRepository.Query();
+        if (dto.MinimumRate != null)
         {
-            query = query.Where(q => q.Hotel.Address.City.Contains(search.CityName));
+            query = query.Where(q => q.Hotel.Rate >= dto.MinimumRate);
         }
 
-        if (search.MaximumPrice != null)
+        if (dto.MinimumPrice != null)
         {
-            query = query.Where(q => q.DailyPrice >= search.MinimumPrice);
+            query = query.Where(q => q.Price >= dto.MinimumPrice);
         }
 
-        if (search.MinimumPrice != null)
+        if (dto.MaximumPrice != null)
         {
-            query = query.Where(q => q.DailyPrice <= search.MaximumPrice);
+            query = query.Where(q => q.Price <= dto.MaximumPrice);
         }
 
-        if (search.MinimumRate != null)
+        if (dto.CityName != null)
         {
-            query = query.Where(q => q.Hotel.Rate >= search.MinimumRate);
+            query = query.Where(q => q.Hotel.Address.City.Contains(dto.CityName));
         }
-        
+
         return query.ToList();
     }
 }
