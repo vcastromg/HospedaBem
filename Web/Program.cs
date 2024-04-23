@@ -23,7 +23,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(
         options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -55,8 +56,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
-// app.MapRazorPages();
 
 app.MapControllers();
 
