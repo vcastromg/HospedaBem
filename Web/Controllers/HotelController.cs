@@ -36,4 +36,11 @@ public class HotelController : ControllerBase
         _hotelService.RegisterHotel(hotel);
         return Created();
     }
+
+    [HttpGet]
+    public IActionResult ListHotelsByRate([FromQuery]string rate)
+    {
+        
+        return Ok(_hotelService.GetHotelsByRate(rate));
+    }
 }

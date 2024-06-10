@@ -20,4 +20,13 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .Select(q => q.Name)
             .ToList();
     }
+
+    public ICollection<Hotel> GetHotelsByRate(double rate)
+    {
+        return Query()
+            .AsNoTracking()
+            .OrderByDescending(q => q.Rate)
+            .Select(q => q)
+            .ToList();
+    }
 }
