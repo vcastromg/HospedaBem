@@ -38,9 +38,16 @@ public class HotelController : ControllerBase
     }
 
     [HttpGet]
+    [Route("/rate")]
     public IActionResult ListHotelsByRate([FromQuery]string rate)
     {
-        
         return Ok(_hotelService.GetHotelsByRate(rate));
+    }
+
+    [HttpGet]
+    [Route("/api/hotel/rooms")]
+    public IActionResult ListAvailableRoomsInHotel([FromQuery] string nome)
+    {
+        return Ok(_hotelService.GetAvailableRoomsInHotel(nome));
     }
 }

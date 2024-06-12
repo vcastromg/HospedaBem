@@ -29,4 +29,13 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .Select(q => q)
             .ToList();
     }
+
+    public ICollection<Room> GetRoomsAvailableInHotel(string hotelName)
+    {
+        return _applicationDbContext.Hotels
+            .Where(hotel => hotel.Name == hotelName)
+            .SelectMany(hotel => hotel.Rooms)
+            .Where(room => room.IsAvailable)
+            .ToList();
+    }
 }

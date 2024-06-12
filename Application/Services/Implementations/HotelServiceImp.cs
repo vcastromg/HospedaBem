@@ -37,4 +37,9 @@ public class HotelServiceImp : HotelService
     {
         return _hotelRepository.GetHotelsByRate(double.Parse(rate));
     }
+
+    public ICollection<Room> GetAvailableRoomsInHotel(string hotelName)
+    {
+        return _hotelRepository.GetRoomsAvailableInHotel(hotelName);
+    }
 }
