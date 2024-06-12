@@ -32,4 +32,14 @@ public class HotelServiceImp : HotelService
     {
         throw new NotImplementedException();
     }
+
+    public ICollection<Hotel> GetHotelsByRate(string rate)
+    {
+        return _hotelRepository.GetHotelsByRate(double.Parse(rate));
+    }
+
+    public ICollection<Room> GetAvailableRoomsInHotel(string hotelName)
+    {
+        return _hotelRepository.GetRoomsAvailableInHotel(hotelName);
+    }
 }
