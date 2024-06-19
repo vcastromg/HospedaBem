@@ -28,6 +28,19 @@ public class HotelServiceImp : HotelService
         _hotelRepository.Add(newHotel);
     }
 
+    public bool RemoveHotelById(long hotelId)
+    {
+        var hotel = _hotelRepository.GetById(hotelId);
+
+        if(hotel == null)
+        {
+            return false;
+        }
+
+        _hotelRepository.Delete(hotel);
+        return true;
+    }
+
     public IEnumerable<Hotel> GetRoomsByHotelId(long hotelId)
     {
         throw new NotImplementedException();
