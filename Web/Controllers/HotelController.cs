@@ -37,6 +37,21 @@ public class HotelController : ControllerBase
         return Created();
     }
 
+    [HttpDelete]
+    [Route("api/hotel/{hotelId}")]
+    public IActionResult RemoveHotelById(long hotelId)
+    {
+        var result = _hotelService.RemoveHotelById(hotelId);
+        if(result)
+        {
+            return NoContent();
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+
     [HttpGet]
     [Route("/rate")]
     public IActionResult ListHotelsByRate([FromQuery]string rate)
