@@ -25,8 +25,8 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
     {
         return Query()
             .AsNoTracking()
+            .Where(q => q.Rate >= rate)
             .OrderByDescending(q => q.Rate)
-            .Select(q => q)
             .ToList();
     }
 

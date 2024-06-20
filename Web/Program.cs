@@ -30,6 +30,8 @@ builder.Services.AddScoped<RoomRepository, RoomRepositoryImp>();
 builder.Services.AddScoped<RoomService, RoomServiceImp>();
 builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
 builder.Services.AddScoped<HotelService, HotelServiceImp>();
+builder.Services.AddScoped<ReviewRepository, ReviewRepositoryImp>();
+builder.Services.AddScoped<ReviewService, ReviewServiceImp>();
 
 builder.Services.AddSwaggerGen();
 
