@@ -1,5 +1,11 @@
-﻿<div class="text-center">
-    <h1 class="display-4">HospedaBem</h1>
+@page
+
+@{
+    ViewData["Title"] = "Início";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Hospeda Bem</h1>
     <form>
         <div class="row">
             <div class="col-sm-12 col-lg-4 mt-3">
@@ -20,6 +26,4 @@
         </div>
         <button type="submit" class="btn btn-primary mt-3">Buscar</button>
     </form>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @* <p>Last hotels: @String.Join(", ", Model.LastHotels)</p> *@
 </div>

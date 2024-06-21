@@ -16,7 +16,39 @@ public class HotelServiceImp : HotelService
     {
         return _hotelRepository.GetAll();
     }
-    
+
+    public IEnumerable<Hotel>? GetRandomHotels(int quantity)
+    {
+        if (quantity == 0)
+        {
+            return [];
+        }
+
+        var hotelsCount = _hotelRepository.Count();
+
+        if (hotelsCount < quantity)
+        {
+            return null;
+        }
+        
+        var uniqueRandomIntegers = new HashSet<int>();
+        Random rand = new Random();
+        while (uniqueRandomIntegers.Count < quantity)
+        {
+            int randomNumber = rand.Next(1, hotelsCount);
+            uniqueRandomIntegers.Add(randomNumber);
+        }
+
+        var hotels = new List<Hotel>();
+        foreach (var randomIndex in uniqueRandomIntegers)
+        {
+            var hotel = _hotelRepository.GetHotelByPosition(randomIndex);
+            hotels.Add(hotel);
+        }
+
+        return hotels;
+    }
+
     public ICollection<string> GetLastRegisteredHotelNames()
     {
         return _hotelRepository.GetLastRegisteredHotelNames();

@@ -16,6 +16,7 @@ public class GeneratorImp : Generator
     {
         var hotelFaker = new Faker<Hotel>()
                 .RuleFor(e => e.Name, f => f.Address.City() + " Hotel")
+                .RuleFor(e => e.CoverImageUrl, f => f.Image.PicsumUrl())
                 // .RuleFor(e => e.Latitude, f => f.Address.Latitude())
                 // .RuleFor(e => e.Longitude, f => f.Address.Longitude())
                 // .RuleFor(e => e.Address, f => f.Address.FullAddress())

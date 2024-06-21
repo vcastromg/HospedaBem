@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HexagonalArchitecture.Views;
+namespace HexagonalArchitecture.Pages;
 
 public class PrivacyModel : PageModel
 {

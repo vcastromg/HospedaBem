@@ -8,4 +8,5 @@ public interface BaseRepository<T> where T: class
     void Update(T entity);
     void Delete(object id);
     IQueryable<T> Query();
+    int Count();
 }
