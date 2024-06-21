@@ -1,0 +1,34 @@
+@page
+@model ExploreModel
+@{
+    ViewData["Title"] = "Explorar";
+}
+
+<h1 class="display-4">Conheça</h1>
+<p>Hoteis maravilhosos pelo mundo</p>
+
+<div>
+    @if (Model.RandomHotels == null)
+    {
+        <div>Não há hoteis suficientes cadastrados.</div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var hotel in Model.RandomHotels)
+            {
+                <div class="col col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="@hotel.CoverImageUrl" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@hotel.Name</h5>
+                            <p class="card-text">@hotel.Address.City</p>
+                            <a href="#" class="btn btn-primary">Ver hotel</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+    }
+</div>

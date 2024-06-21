@@ -48,4 +48,9 @@ public class BaseRepositoryImp<T>: BaseRepository<T> where T: class
     {
         return _table.AsNoTracking().AsQueryable();
     }
+
+    public int Count()
+    {
+        return _table.Count();
+    }
 }

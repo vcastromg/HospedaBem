@@ -1,6 +1,8 @@
 using Application.Repositories;
 using Application.Services;
 using Application.Services.Implementations;
+using DataGeneration;
+using DataGeneration.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Infra;
@@ -32,6 +34,7 @@ builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
 builder.Services.AddScoped<HotelService, HotelServiceImp>();
 builder.Services.AddScoped<ReviewRepository, ReviewRepositoryImp>();
 builder.Services.AddScoped<ReviewService, ReviewServiceImp>();
+builder.Services.AddScoped<Generator, GeneratorImp>();
 
 builder.Services.AddSwaggerGen();
 

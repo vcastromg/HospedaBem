@@ -38,4 +38,13 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .Where(room => room.IsAvailable)
             .ToList();
     }
+
+    public Hotel GetHotelByPosition(int position)
+    {
+        return _applicationDbContext.Hotels
+            .Include(q => q.Address)
+            .Skip(position)
+            .Take(1)
+            .First();
+    }
 }

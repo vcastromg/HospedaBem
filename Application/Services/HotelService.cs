@@ -5,6 +5,7 @@ namespace Application.Services;
 public interface HotelService
 {
     IEnumerable<Hotel> GetAllHotels();
+    IEnumerable<Hotel>? GetRandomHotels(int quantity);
     ICollection<string> GetLastRegisteredHotelNames();
     void RegisterHotel(Hotel hotel);
     IEnumerable<Hotel> GetRoomsByHotelId(long hotelId);
