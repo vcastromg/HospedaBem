@@ -56,9 +56,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
-
 app.MapControllers();
+
+app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
