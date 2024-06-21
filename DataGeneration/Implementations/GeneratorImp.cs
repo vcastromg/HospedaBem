@@ -12,7 +12,7 @@ public class GeneratorImp : Generator
         _applicationDbContext = applicationDbContext;
     }
 
-    public void Generate(int hotelQuantity)
+    public void GenerateHotels(int hotelQuantity)
     {
         var hotelFaker = new Faker<Hotel>()
                 .RuleFor(e => e.Name, f => f.Address.City() + " Hotel")
