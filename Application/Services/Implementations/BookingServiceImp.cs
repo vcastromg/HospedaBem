@@ -15,4 +15,18 @@ public class BookingServiceImp : BookingService
     {
         throw new NotImplementedException();
     }
+
+    public void CancelBooking(long bookingId)
+    {
+        var booking = _bookingRepository.GetById(bookingId);
+        
+        if (booking == null)
+        {
+            throw new ArgumentException("Booking not found");
+        }
+        else
+        {
+            _bookingRepository.Delete(booking);
+        }
+    }
 }
