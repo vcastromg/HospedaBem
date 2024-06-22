@@ -29,4 +29,22 @@ public class BookingServiceImp : BookingService
             _bookingRepository.Delete(booking);
         }
     }
+
+    public bool CheckRoomAvailabilityWithinPeriod(int roomId, DateTime checkIn, DateTime checkOut)
+    {
+        if(checkIn >= checkOut)
+        {
+            throw new ArgumentException("Check in date should be strictly before check out date");
+        }
+
+        ICollection<Booking> roomBookings = _bookingRepository.GetBookingsByRoomId(roomId);
+        foreach (Booking roomBooking in roomBookings)
+        {
+            if(roomBooking.CheckIn < checkOut && roomBooking.CheckOut > checkIn)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
