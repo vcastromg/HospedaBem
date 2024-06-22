@@ -8,5 +8,5 @@ public interface ReviewService
     public void CreateReview(CreateReviewDTO review);
     public ICollection<Review> GetReviewsByUser(string userId);
     public Review UpdateReview(UpdateReviewDTO review);
-    public void DeleteReview(long id);
+    public void DeleteReview(string id);
 }

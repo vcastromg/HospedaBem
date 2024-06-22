@@ -53,7 +53,7 @@ public class ReviewServiceImp : ReviewService
         return _reviewRepository.UpdateReview(existingReview);
     }
 
-    public void DeleteReview(long id)
+    public void DeleteReview(string id)
     {
         var existingReview = _reviewRepository.GetById(id);
         if (existingReview != null)

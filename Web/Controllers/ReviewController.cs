@@ -35,4 +35,10 @@ public class ReviewController : ControllerBase
         return Ok(_reviewService.UpdateReview(review));
     }
 
+    [HttpDelete("/delete/{id}")]
+    public IActionResult DeleteReview([FromRoute] string id)
+    {
+        _reviewService.DeleteReview(id);
+        return NoContent();
+    }
 }
