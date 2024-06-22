@@ -1,11 +1,12 @@
 ﻿using Domain;
+using DTOs;
 
 namespace Application.Services;
 
 public interface ReviewService
 {
-    public void CreateReview(Review review);
+    public void CreateReview(CreateReviewDTO review);
     public ICollection<Review> GetReviewsByUser(string userId);
-    public Review UpdateReview(Review review);
+    public Review UpdateReview(UpdateReviewDTO review);
     public void DeleteReview(long id);
 }

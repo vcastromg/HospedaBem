@@ -1,5 +1,6 @@
 ﻿using Application.Services;
 using Domain;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HexagonalArchitecture.Controllers;
@@ -16,7 +17,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpPost]
-    public CreatedResult CreateReview(Review review)
+    public CreatedResult CreateReview(CreateReviewDTO review)
     {
         _reviewService.CreateReview(review);
         return Created();
@@ -29,7 +30,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpPost("/update")]
-    public IActionResult UpdateReview(Review review)
+    public IActionResult UpdateReview(UpdateReviewDTO review)
     {
         return Ok(_reviewService.UpdateReview(review));
     }
