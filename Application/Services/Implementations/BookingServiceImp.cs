@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain;
+using Domain.Entities;
 
 namespace Application.Services.Implementations;
 public class BookingServiceImp : BookingService
@@ -11,9 +12,16 @@ public class BookingServiceImp : BookingService
         _bookingRepository = bookingRepository;
     }
 
-    public Booking Book(DateTime checkin, DateTime checkout, int roomId)
+    public void Book(DateTime checkIn, DateTime checkOut, Room room, AppUser user)
     {
-        throw new NotImplementedException();
+        if(!CheckRoomAvailabilityWithinPeriod(room.Id, checkIn, checkOut))
+        {
+            throw new Exception($"The room is not available from {checkIn} to {checkOut}");
+        }
+        else
+        {
+            _bookingRepository.Add(new Booking(checkIn, checkOut, user, room));
+        }
     }
 
     public void CancelBooking(long bookingId)
@@ -30,7 +38,7 @@ public class BookingServiceImp : BookingService
         }
     }
 
-    public bool CheckRoomAvailabilityWithinPeriod(int roomId, DateTime checkIn, DateTime checkOut)
+    public bool CheckRoomAvailabilityWithinPeriod(long roomId, DateTime checkIn, DateTime checkOut)
     {
         if(checkIn >= checkOut)
         {
