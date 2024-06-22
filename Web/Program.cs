@@ -34,6 +34,8 @@ builder.Services.AddScoped<HotelRepository, HotelRepositoryImp>();
 builder.Services.AddScoped<HotelService, HotelServiceImp>();
 builder.Services.AddScoped<ReviewRepository, ReviewRepositoryImp>();
 builder.Services.AddScoped<ReviewService, ReviewServiceImp>();
+builder.Services.AddScoped<AppUserRepository, AppUserRepositoryImp>();
+builder.Services.AddScoped<AppUserService, AppUserServiceImp>();
 builder.Services.AddScoped<Generator, GeneratorImp>();
 
 builder.Services.AddSwaggerGen();
