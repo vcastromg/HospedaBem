@@ -25,4 +25,9 @@ public class AppUserServiceImp : AppUserService
         return users;
     }
 
+    public IdentityUser FindById(string id)
+    {
+        return _appUserRepository.FindById(id);
+    }
+
 }

@@ -9,7 +9,8 @@ public class AppUserRepositoryImp : BaseRepositoryImp<IdentityUser>, AppUserRepo
     private readonly ApplicationDbContext _applicationDbContext;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public AppUserRepositoryImp(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager) : base(applicationDbContext)
+    public AppUserRepositoryImp(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager) :
+        base(applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;
         _userManager = userManager;
@@ -18,5 +19,16 @@ public class AppUserRepositoryImp : BaseRepositoryImp<IdentityUser>, AppUserRepo
     public IEnumerable<IdentityUser> GetAll()
     {
         return _userManager.Users;
+    }
+
+    public IdentityUser FindById(string id)
+    {
+        var user = _userManager.FindByIdAsync(id).Result;
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+
+        return user;
     }
 }

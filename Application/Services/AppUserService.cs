@@ -6,4 +6,5 @@ namespace Application.Services;
 public interface AppUserService
 {
     public IEnumerable<IdentityUser> GetAll();
+    public IdentityUser FindById(string id);
 }

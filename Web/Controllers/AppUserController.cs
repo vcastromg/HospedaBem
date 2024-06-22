@@ -19,4 +19,10 @@ public class AppUserController : ControllerBase
     {
         return Ok(_appUserService.GetAll());
     }
+
+    [HttpGet("{id}")]
+    public IActionResult GetUserById([FromRoute] string id)
+    {
+        return Ok(_appUserService.FindById(id));
+    }
 }
