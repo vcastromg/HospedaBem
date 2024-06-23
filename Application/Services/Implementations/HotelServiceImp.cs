@@ -87,4 +87,9 @@ public class HotelServiceImp : HotelService
     {
         return _hotelRepository.GetRoomsAvailableInHotel(hotelName);
     }
+
+    public Hotel? GetHotelById(long id)
+    {
+        return _hotelRepository.GetHotelByIdForPage(id);
+    }
 }

@@ -12,4 +12,5 @@ public interface HotelService
     IEnumerable<Hotel> GetRoomsByHotelId(long hotelId);
     ICollection<Hotel> GetHotelsByRate(string rate);
     ICollection<Room> GetAvailableRoomsInHotel(string hotelName);
+    Hotel? GetHotelById(long id);
 }

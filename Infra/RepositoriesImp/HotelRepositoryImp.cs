@@ -47,4 +47,14 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .Take(1)
             .First();
     }
+
+    public Hotel? GetHotelByIdForPage(long id)
+    {
+        return _applicationDbContext.Hotels
+            .Include(q => q.Rooms)
+            .Include(q => q.Address)
+            .AsNoTracking()
+            .FirstOrDefault(q => q.Id == id);
+
+    }
 }

@@ -8,4 +8,5 @@ public interface HotelRepository: BaseRepository<Hotel>
     public ICollection<Hotel> GetHotelsByRate(double rate);
     public ICollection<Room> GetRoomsAvailableInHotel(string hotelName);
     public Hotel GetHotelByPosition(int position);
+    public Hotel? GetHotelByIdForPage(long id);
 }
