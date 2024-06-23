@@ -9,6 +9,7 @@ public interface HotelService
     ICollection<string> GetLastRegisteredHotelNames();
     void RegisterHotel(Hotel hotel);
     bool RemoveHotelById(long hotelId);
+    void UpdateHotelCoverImage(long hotelId, string imageUrl);
     IEnumerable<Hotel> GetRoomsByHotelId(long hotelId);
     ICollection<Hotel> GetHotelsByRate(string rate);
     ICollection<Room> GetAvailableRoomsInHotel(string hotelName);
