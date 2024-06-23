@@ -51,7 +51,7 @@ public class BookingServiceImp : BookingService
         
         if (booking == null)
         {
-            throw new ArgumentException("Booking not found");
+            throw new Exception("Booking not found");
         }
         else
         {
