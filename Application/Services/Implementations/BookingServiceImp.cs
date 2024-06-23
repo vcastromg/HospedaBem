@@ -61,17 +61,20 @@ public class BookingServiceImp : BookingService
 
     public void UpdateBookingPeriod(long bookingId, DateTime checkIn, DateTime checkOut)
     {
+        var booking = _bookingRepository.GetById(bookingId);
+        if (booking == null)
+        {
+            throw new Exception("Booking not found");
+        }
+
         if (!CheckRoomAvailabilityWithinPeriod(bookingId, checkIn, checkOut))
         {
-            var booking = _bookingRepository.GetById(bookingId);
-            if (booking == null)
-            {
-                throw new Exception("Booking not found");
-            }
-            booking.CheckIn = checkIn;
-            booking.CheckOut = checkOut;
-            _bookingRepository.Update(booking);
+            throw new Exception($"The room is not available from {checkIn} to {checkOut}");
         }
+
+        booking.CheckIn = checkIn;
+        booking.CheckOut = checkOut;
+        _bookingRepository.Update(booking);
     }
 
     public bool CheckRoomAvailabilityWithinPeriod(long roomId, DateTime checkIn, DateTime checkOut)
