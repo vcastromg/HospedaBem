@@ -11,9 +11,11 @@ public class BookingServiceImp : BookingService
     private readonly RoomService _roomService;
     private readonly AppUserService _userService;
 
-    public BookingServiceImp(BookingRepository bookingRepository)
+    public BookingServiceImp(BookingRepository bookingRepository, RoomService roomService, AppUserService userService)
     {
         _bookingRepository = bookingRepository;
+        _roomService = roomService;
+        _userService = userService;
     }
 
     public void Book(CreateBookingDTO dto)
