@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain.Entities;
+using DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories.Implementations;
@@ -56,5 +57,35 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .AsNoTracking()
             .FirstOrDefault(q => q.Id == id);
 
+    }
+
+    public IEnumerable<Hotel> Search(HotelSearchDto dto)
+    {
+        var query = _applicationDbContext.Hotels
+            .AsNoTracking()
+            .Include(q => q.Rooms)
+            .Include(q => q.Address)
+            .AsQueryable();
+        if (dto.MinimumRate != null)
+        {
+            query = query.Where(q => q.Rate >= dto.MinimumRate);
+        }
+
+        if (dto.MinimumPrice != null)
+        {
+            query = query.Where(q => q.Rooms!.Any(r => r.Price >= dto.MinimumPrice));
+        }
+
+        if (dto.MaximumPrice != null)
+        {
+            query = query.Where(q => q.Rooms!.Any(r => r.Price <= dto.MaximumPrice));
+        }
+
+        if (dto.CityName != null)
+        {
+            query = query.Where(q => q.Address.City.Contains(dto.CityName));
+        }
+
+        return query.ToList();
     }
 }

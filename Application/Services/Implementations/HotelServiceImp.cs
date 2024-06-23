@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain.Entities;
+using DTOs;
 
 namespace Application.Services.Implementations;
 
@@ -91,5 +92,10 @@ public class HotelServiceImp : HotelService
     public Hotel? GetHotelById(long id)
     {
         return _hotelRepository.GetHotelByIdForPage(id);
+    }
+
+    public IEnumerable<Hotel> Search(HotelSearchDto dto)
+    {
+        return _hotelRepository.Search(dto);
     }
 }
