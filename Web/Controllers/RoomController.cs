@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HexagonalArchitecture.Controllers;
 
 [ApiController]
-[Route("api/room")]
+[Route("/api/room")]
 public class RoomController : ControllerBase
 {
     private readonly RoomService _roomService;
@@ -23,7 +23,8 @@ public class RoomController : ControllerBase
         return Created();
     }
 
-    [HttpGet("/{id}")]
+    [HttpGet]
+    [Route("/api/room/{id}")]
     public IActionResult GetRoomById([FromRoute] string id)
     {
         return Ok(_roomService.FindRoomById(id));
