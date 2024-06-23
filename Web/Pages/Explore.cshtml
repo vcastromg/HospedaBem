@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <h5 class="card-title">@hotel.Name</h5>
                             <p class="card-text">@hotel.Address.City</p>
-                            <a href="#" class="btn btn-primary">Ver hotel</a>
+                            <a class="btn btn-primary" asp-area="" asp-page="/hotel" asp-route-id="@hotel.Id">Ver hotel</a>
                         </div>
                     </div>
                 </div>
