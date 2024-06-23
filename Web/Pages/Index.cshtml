@@ -1,4 +1,5 @@
-@page
+@page "{city?}"
+@model IndexModel
 
 @{
     ViewData["Title"] = "Início";
@@ -6,11 +7,11 @@
 
 <div class="text-center">
     <h1 class="display-4">Hospeda Bem</h1>
-    <form>
+    <form method="get">
         <div class="row">
             <div class="col-sm-12 col-lg-4 mt-3">
                 <label for="city" class="form-label">Cidade</label>
-                <input class="form-control" id="city" aria-describedby="cityHelp">
+                <input class="form-control" id="city" name="city" aria-describedby="cityHelp" required>
                 <div id="cityHelp" class="form-text">Escolha um destino.</div>
             </div>
             <div class="col-12 col-lg-4 mt-3">
@@ -27,3 +28,35 @@
         <button type="submit" class="btn btn-primary mt-3">Buscar</button>
     </form>
 </div>
+
+
+@if (Model.CitySearch != null)
+{
+    <hr class="hr my-4"/>
+    <h2>Pesquisa por hotéis em "@Model.CitySearch"</h2>
+    <div class="row mt-4">
+        @foreach (var hotel in Model.HotelResults)
+        {
+            <div class="col col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="@hotel.CoverImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@hotel.Name</h5>
+                        <p class="card-text">@hotel.Address.City</p>
+                        <div class="d-flex justify-content-between">
+                            @if (@hotel.Rooms!.Count == 1)
+                            {
+                            <small>1 quarto disponível</small>
+                            }
+                            else
+                            {
+                            <small>@hotel.Rooms.Count quartos disponíveis</small>
+                            }
+                            <a class="btn btn-secondary" asp-area="" asp-page="/hotel" asp-route-id="@hotel.Id">Ver hotel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
