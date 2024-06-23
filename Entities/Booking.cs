@@ -10,14 +10,4 @@ public class Booking: BaseEntity
 
     public virtual AppUser User { get; set; }
     public virtual Room Room { get; set; }
-
-    public Booking() { }
-
-    public Booking(DateTime checkIn, DateTime checkOut, AppUser user, Room room)
-    {
-        CheckIn = checkIn;
-        CheckOut = checkOut;
-        User = user;
-        Room = room;
-    }
 }

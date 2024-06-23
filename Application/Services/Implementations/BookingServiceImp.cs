@@ -6,22 +6,43 @@ namespace Application.Services.Implementations;
 public class BookingServiceImp : BookingService
 {
     private readonly BookingRepository _bookingRepository;
+    private readonly RoomRepository _roomRepository;
+    private readonly AppUserRepository _userRepository;
 
-    public BookingServiceImp(BookingRepository bookingRepository)
+    public BookingServiceImp(BookingRepository bookingRepository, RoomRepository roomRepository, AppUserRepository userRepository)
     {
         _bookingRepository = bookingRepository;
+        _roomRepository = roomRepository;
+        _userRepository = userRepository;
     }
 
-    public void Book(DateTime checkIn, DateTime checkOut, Room room, AppUser user)
+    public void Book(DateTime checkIn, DateTime checkOut, long roomId, long userId)
     {
+        var room = _roomRepository.GetById(roomId);
+        if (room == null)
+        {
+            throw new Exception("Room not found");
+        }
+        
+        var user = _userRepository.GetById(userId);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        
         if(!CheckRoomAvailabilityWithinPeriod(room.Id, checkIn, checkOut))
         {
             throw new Exception($"The room is not available from {checkIn} to {checkOut}");
         }
-        else
+
+        var booking = new Booking
         {
-            _bookingRepository.Add(new Booking(checkIn, checkOut, user, room));
-        }
+            CheckIn = checkIn,
+            CheckOut = checkOut,
+            // User = user,
+            Room = room
+        };
+        _bookingRepository.Add(booking);
     }
 
     public void CancelBooking(long bookingId)
