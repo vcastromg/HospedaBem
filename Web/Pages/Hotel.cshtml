@@ -1,0 +1,30 @@
+@page "{id}"
+@model HotelModel
+@{
+    ViewData["Title"] = "Hotel";
+}
+
+<h1 class="display-4">@Model.Hotel.Name</h1>
+<p>Hotel em @Model.Hotel.Address.City</p>
+
+<div style="
+    background-image: url('@Model.Hotel.CoverImageUrl'); 
+    height: 5rem;
+    background-size: cover;
+    background-position: center center;">
+    
+</div>
+
+<div>
+    @if (Model.Hotel.Rooms == null)
+    {
+        <div>Não há quartos disponíveis.</div>
+    }
+    else
+    {
+        foreach (var room in Model.Hotel.Rooms)
+        {
+            <div>Quarto para @room.GuestsCapacity pessoas</div>
+        }
+    }
+</div>
