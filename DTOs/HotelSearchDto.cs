@@ -1,6 +1,6 @@
 ﻿namespace DTOs;
 
-public class RoomSearchDTO
+public class HotelSearchDto
 {
     public DateTime? MininumDate { get; set; }
     public DateTime? MaximumDate { get; set; }
