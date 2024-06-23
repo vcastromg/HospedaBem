@@ -60,9 +60,16 @@ public class HotelController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/api/hotel/rooms")]
-    public IActionResult ListAvailableRoomsInHotel([FromQuery] string nome)
+    [Route("/api/hotel/rooms/{id}")]
+    public IActionResult ListAvailableRoomsInHotel([FromRoute] string id)
     {
-        return Ok(_hotelService.GetAvailableRoomsInHotel(nome));
+        return Ok(_hotelService.GetAvailableRoomsInHotel(id));
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public IActionResult FindHotelById([FromRoute] string id)
+    {
+        return Ok(_hotelService.GetHotelById(id));
     }
 }
