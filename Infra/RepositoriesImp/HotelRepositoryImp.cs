@@ -31,10 +31,10 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .ToList();
     }
 
-    public ICollection<Room> GetRoomsAvailableInHotel(string hotelName)
+    public ICollection<Room> GetRoomsAvailableInHotel(long hotelId)
     {
         return _applicationDbContext.Hotels
-            .Where(hotel => hotel.Name == hotelName)
+            .Where(hotel => hotel.Id == hotelId)
             .SelectMany(hotel => hotel.Rooms)
             .Where(room => room.IsAvailable)
             .ToList();

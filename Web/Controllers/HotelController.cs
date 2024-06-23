@@ -2,6 +2,7 @@
 
 using Application.Services;
 using Domain.Entities;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HexagonalArchitecture.Controllers;
@@ -30,15 +31,14 @@ public class HotelController : ControllerBase
     }
 
     [HttpPost]
-    [Route("/api/hotel")]
-    public CreatedResult RegisterHotel(Hotel hotel)
+    public CreatedResult RegisterHotel(CreateHotelDTO hotel)
     {
         _hotelService.RegisterHotel(hotel);
         return Created();
     }
 
     [HttpDelete]
-    [Route("api/hotel/{hotelId}")]
+    [Route("/{hotelId}")]
     public IActionResult RemoveHotelById(long hotelId)
     {
         var result = _hotelService.RemoveHotelById(hotelId);
@@ -60,9 +60,16 @@ public class HotelController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/api/hotel/rooms")]
-    public IActionResult ListAvailableRoomsInHotel([FromQuery] string nome)
+    [Route("/api/hotel/rooms/{id}")]
+    public IActionResult ListAvailableRoomsInHotel([FromRoute] string id)
     {
-        return Ok(_hotelService.GetAvailableRoomsInHotel(nome));
+        return Ok(_hotelService.GetAvailableRoomsInHotel(id));
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public IActionResult FindHotelById([FromRoute] string id)
+    {
+        return Ok(_hotelService.GetHotelById(id));
     }
 }

@@ -55,4 +55,15 @@ public class BookingServiceImp : BookingService
         }
         return true;
     }
+
+    public Booking FindBookingById(string id)
+    {
+        var booking = _bookingRepository.GetById(id);
+        if (booking == null)
+        {
+            throw new Exception("Booking not found");
+        }
+
+        return booking;
+    }
 }
