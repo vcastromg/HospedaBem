@@ -43,18 +43,29 @@ public class RoomServiceImp : RoomService
 
     public Room RegisterRoom(RegisterRoomDTO dto)
     {
-        //find hotel by id
+        var hotel = _hotelService.GetHotelById(dto.HotelId);
         var newRoom = new Room()
         {
             Number = dto.Number,
             GuestsCapacity = dto.GuestsCapacity,
             IsAvailable = dto.IsAvailable,
             Price = dto.Price,
-            Hotel = null
+            Hotel = hotel
         };
         
         _roomRepository.Add(newRoom);
 
         return newRoom;
+    }
+
+    public Room FindRoomById(string id)
+    {
+        var room = _roomRepository.GetById(long.Parse(id));
+        if (room == null)
+        {
+            throw new Exception("Room not found");
+        }
+
+        return room;
     }
 }

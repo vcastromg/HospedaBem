@@ -17,6 +17,17 @@ public class HotelServiceImp : HotelService
         return _hotelRepository.GetAll();
     }
 
+    public Hotel GetHotelById(string id)
+    {
+        var hotel = _hotelRepository.GetById(id);
+        if (hotel == null)
+        {
+            throw new Exception("Hotel not found");
+        }
+
+        return hotel;
+    }
+
     public IEnumerable<Hotel>? GetRandomHotels(int quantity)
     {
         if (quantity == 0)
