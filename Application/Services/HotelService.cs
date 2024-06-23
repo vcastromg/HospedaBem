@@ -13,5 +13,5 @@ public interface HotelService
     bool RemoveHotelById(long hotelId);
     IEnumerable<Hotel> GetRoomsByHotelId(long hotelId);
     ICollection<Hotel> GetHotelsByRate(string rate);
-    ICollection<Room> GetAvailableRoomsInHotel(string hotelName);
+    ICollection<Room> GetAvailableRoomsInHotel(string hotelId);
 }

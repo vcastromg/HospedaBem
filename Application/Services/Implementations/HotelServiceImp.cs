@@ -20,7 +20,7 @@ public class HotelServiceImp : HotelService
 
     public Hotel GetHotelById(string id)
     {
-        var hotel = _hotelRepository.GetById(id);
+        var hotel = _hotelRepository.GetById(long.Parse(id));
         if (hotel == null)
         {
             throw new Exception("Hotel not found");
@@ -112,8 +112,10 @@ public class HotelServiceImp : HotelService
         return _hotelRepository.GetHotelsByRate(double.Parse(rate));
     }
 
-    public ICollection<Room> GetAvailableRoomsInHotel(string hotelName)
+    public ICollection<Room> GetAvailableRoomsInHotel(string hotelId)
     {
-        return _hotelRepository.GetRoomsAvailableInHotel(hotelName);
+        return _hotelRepository.GetRoomsAvailableInHotel(long.Parse(hotelId));
     }
+    
+    
 }
