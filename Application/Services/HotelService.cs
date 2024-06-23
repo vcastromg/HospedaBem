@@ -11,6 +11,7 @@ public interface HotelService
     ICollection<string> GetLastRegisteredHotelNames();
     void RegisterHotel(CreateHotelDTO dto);
     bool RemoveHotelById(long hotelId);
+    void UpdateHotelCoverImage(long hotelId, string imageUrl);
     IEnumerable<Hotel> GetRoomsByHotelId(long hotelId);
     ICollection<Hotel> GetHotelsByRate(string rate);
     ICollection<Room> GetAvailableRoomsInHotel(string hotelId);

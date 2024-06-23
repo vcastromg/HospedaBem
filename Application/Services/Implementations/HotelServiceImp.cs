@@ -102,6 +102,18 @@ public class HotelServiceImp : HotelService
         return true;
     }
 
+    public void UpdateHotelCoverImage(long hotelId,  string imageUrl)
+    {
+        var hotel = _hotelRepository.GetById(hotelId);
+        if (hotel == null)
+        {
+            throw new Exception("Hotel not found");
+        }
+
+        hotel.CoverImageUrl = imageUrl;
+        _hotelRepository.Update(hotel);
+    }
+
     public IEnumerable<Hotel> GetRoomsByHotelId(long hotelId)
     {
         throw new NotImplementedException();
