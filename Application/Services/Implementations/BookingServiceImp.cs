@@ -28,7 +28,14 @@ public class BookingServiceImp : BookingService
             throw new Exception($"The room is not available from {dto.CheckIn} to {dto.CheckOut}");
         }
 
-        _bookingRepository.Add(new Booking(dto.CheckIn, dto.CheckOut, (AppUser)user, room));
+        var booking = new Booking
+        {
+            CheckIn = dto.CheckIn,
+            CheckOut = dto.CheckOut,
+            User = (AppUser)user,
+            Room = room
+        };
+        _bookingRepository.Add(booking);
     }
 
     public void CancelBooking(long bookingId)
