@@ -1,54 +1,40 @@
 ﻿using Application.Repositories;
 using Domain;
 using Domain.Entities;
+using DTOs;
 
 namespace Application.Services.Implementations;
+
 public class BookingServiceImp : BookingService
 {
     private readonly BookingRepository _bookingRepository;
-    private readonly RoomRepository _roomRepository;
-    private readonly AppUserRepository _userRepository;
+    private readonly RoomService _roomService;
+    private readonly AppUserService _userService;
 
-    public BookingServiceImp(BookingRepository bookingRepository, RoomRepository roomRepository, AppUserRepository userRepository)
+    public BookingServiceImp(BookingRepository bookingRepository, RoomService roomService, AppUserService userService)
     {
         _bookingRepository = bookingRepository;
-        _roomRepository = roomRepository;
-        _userRepository = userRepository;
+        _roomService = roomService;
+        _userService = userService;
     }
 
-    public void Book(DateTime checkIn, DateTime checkOut, long roomId, long userId)
+    public void Book(CreateBookingDTO dto)
     {
-        var room = _roomRepository.GetById(roomId);
-        if (room == null)
+        var room = _roomService.FindRoomById(dto.RoomId);
+        var user = _userService.FindById(dto.UserId);
+
+        if (!CheckRoomAvailabilityWithinPeriod(room.Id, dto.CheckIn, dto.CheckOut))
         {
-            throw new Exception("Room not found");
-        }
-        
-        var user = _userRepository.GetById(userId);
-        if (user == null)
-        {
-            throw new Exception("User not found");
-        }
-        
-        if(!CheckRoomAvailabilityWithinPeriod(room.Id, checkIn, checkOut))
-        {
-            throw new Exception($"The room is not available from {checkIn} to {checkOut}");
+            throw new Exception($"The room is not available from {dto.CheckIn} to {dto.CheckOut}");
         }
 
-        var booking = new Booking
-        {
-            CheckIn = checkIn,
-            CheckOut = checkOut,
-            // User = user,
-            Room = room
-        };
-        _bookingRepository.Add(booking);
+        _bookingRepository.Add(new Booking(dto.CheckIn, dto.CheckOut, (AppUser)user, room));
     }
 
     public void CancelBooking(long bookingId)
     {
         var booking = _bookingRepository.GetById(bookingId);
-        
+
         if (booking == null)
         {
             throw new Exception("Booking not found");
@@ -79,7 +65,7 @@ public class BookingServiceImp : BookingService
 
     public bool CheckRoomAvailabilityWithinPeriod(long roomId, DateTime checkIn, DateTime checkOut)
     {
-        if(checkIn >= checkOut)
+        if (checkIn >= checkOut)
         {
             throw new ArgumentException("Check in date should be strictly before check out date");
         }
@@ -87,11 +73,12 @@ public class BookingServiceImp : BookingService
         ICollection<Booking> roomBookings = _bookingRepository.GetBookingsByRoomId(roomId);
         foreach (Booking roomBooking in roomBookings)
         {
-            if(roomBooking.CheckIn < checkOut && roomBooking.CheckOut > checkIn)
+            if (roomBooking.CheckIn < checkOut && roomBooking.CheckOut > checkIn)
             {
                 return false;
             }
         }
+
         return true;
     }
 
