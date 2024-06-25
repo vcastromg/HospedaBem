@@ -21,3 +21,9 @@ body {
   background: linear-gradient(to bottom, #A89AFF, #FFFFFF);
   margin-bottom: 60px;
 }
+
+.btn-custom {
+  background: linear-gradient(to right, #0090FF, #0090FF);
+  border: none;
+  color: white;
+}
