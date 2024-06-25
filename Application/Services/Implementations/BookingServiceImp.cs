@@ -28,7 +28,15 @@ public class BookingServiceImp : BookingService
             throw new Exception($"The room is not available from {dto.CheckIn} to {dto.CheckOut}");
         }
 
-        _bookingRepository.Add(new Booking(dto.CheckIn, dto.CheckOut, (AppUser)user, room));
+        var booking = new Booking
+        {
+            CheckIn = dto.CheckIn,
+            CheckOut = dto.CheckOut,
+            Comment = dto.Comment,
+            User = user,
+            Room = room
+        };
+        _bookingRepository.Add(booking);
     }
 
     public void CancelBooking(long bookingId)
@@ -37,12 +45,30 @@ public class BookingServiceImp : BookingService
 
         if (booking == null)
         {
-            throw new ArgumentException("Booking not found");
+            throw new Exception("Booking not found");
         }
         else
         {
             _bookingRepository.Delete(booking);
         }
+    }
+
+    public void UpdateBookingPeriod(long bookingId, DateTime checkIn, DateTime checkOut)
+    {
+        var booking = _bookingRepository.GetById(bookingId);
+        if (booking == null)
+        {
+            throw new Exception("Booking not found");
+        }
+
+        if (!CheckRoomAvailabilityWithinPeriod(bookingId, checkIn, checkOut))
+        {
+            throw new Exception($"The room is not available from {checkIn} to {checkOut}");
+        }
+
+        booking.CheckIn = checkIn;
+        booking.CheckOut = checkOut;
+        _bookingRepository.Update(booking);
     }
 
     public bool CheckRoomAvailabilityWithinPeriod(long roomId, DateTime checkIn, DateTime checkOut)
@@ -66,12 +92,23 @@ public class BookingServiceImp : BookingService
 
     public Booking FindBookingById(string id)
     {
-        var booking = _bookingRepository.GetById(id);
+        var booking = _bookingRepository.GetById(long.Parse(id));
         if (booking == null)
         {
             throw new Exception("Booking not found");
         }
 
         return booking;
+    }
+
+    public IEnumerable<Booking> FindBookingsByUser(string userId)
+    {
+        var bookings = _bookingRepository.GetBookingsbyUser(userId);
+        if (bookings == null)
+        {
+            throw new Exception("Bookings not found");
+        }
+
+        return bookings;
     }
 }

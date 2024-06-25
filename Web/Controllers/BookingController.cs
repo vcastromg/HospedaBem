@@ -21,4 +21,16 @@ public class BookingController : ControllerBase
         _bookingService.Book(dto);
         return Created();
     }
+
+    [HttpGet("{id}")]
+    public IActionResult FindBookingById([FromRoute]string id)
+    {
+        return Ok(_bookingService.FindBookingById(id));
+    }
+
+    [HttpGet("/user/{userId}")]
+    public IActionResult FindBookingsByUserId([FromRoute] string userId)
+    {
+        return Ok(_bookingService.FindBookingsByUser(userId));
+    }
 }
