@@ -32,7 +32,8 @@ public class BookingServiceImp : BookingService
         {
             CheckIn = dto.CheckIn,
             CheckOut = dto.CheckOut,
-            User = (AppUser)user,
+            Comment = dto.Comment,
+            User = user,
             Room = room
         };
         _bookingRepository.Add(booking);
@@ -91,12 +92,23 @@ public class BookingServiceImp : BookingService
 
     public Booking FindBookingById(string id)
     {
-        var booking = _bookingRepository.GetById(id);
+        var booking = _bookingRepository.GetById(long.Parse(id));
         if (booking == null)
         {
             throw new Exception("Booking not found");
         }
 
         return booking;
+    }
+
+    public IEnumerable<Booking> FindBookingsByUser(string userId)
+    {
+        var bookings = _bookingRepository.GetBookingsbyUser(userId);
+        if (bookings == null)
+        {
+            throw new Exception("Bookings not found");
+        }
+
+        return bookings;
     }
 }
