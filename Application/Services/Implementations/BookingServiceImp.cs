@@ -100,4 +100,15 @@ public class BookingServiceImp : BookingService
 
         return booking;
     }
+
+    public IEnumerable<Booking> FindBookingsByUser(string userId)
+    {
+        var bookings = _bookingRepository.GetBookingsbyUser(userId);
+        if (bookings == null)
+        {
+            throw new Exception("Bookings not found");
+        }
+
+        return bookings;
+    }
 }

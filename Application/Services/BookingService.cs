@@ -11,4 +11,5 @@ public interface BookingService
     void UpdateBookingPeriod(long bookingId, DateTime checkIn, DateTime checkOut);
     bool CheckRoomAvailabilityWithinPeriod(long roomId, DateTime checkIn, DateTime checkOut);
     Booking FindBookingById(string id);
+    IEnumerable<Booking> FindBookingsByUser(string userId);
 }
