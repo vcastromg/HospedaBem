@@ -27,7 +27,15 @@ body {
   border: none;
   color: white;
 }
+
 .logo img {
   width: 300px;
   margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 75px; 
+  margin-bottom: 30px;
 }
