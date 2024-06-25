@@ -33,6 +33,10 @@ body {
   margin-bottom: 20px;
 }
 
+.ico img{
+  width: 150px;
+}
+
 .subtitle {
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
