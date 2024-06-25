@@ -7,6 +7,7 @@ namespace DataGeneration.Implementations;
 public class GeneratorImp : Generator
 {
     private readonly ApplicationDbContext _applicationDbContext;
+
     public GeneratorImp(ApplicationDbContext applicationDbContext) : base()
     {
         _applicationDbContext = applicationDbContext;
@@ -15,8 +16,8 @@ public class GeneratorImp : Generator
     public void GenerateHotels(int hotelQuantity)
     {
         var roomFaker = new Faker<Room>()
-            .RuleFor(r => r.GuestsCapacity, f => f.Random.Int(1, 4))
-            .RuleFor(r => r.Type, f => f.PickRandom("Single", "Double", "Suite"))
+            .RuleFor(r => r.GuestsCapacity, f => UInt16.Parse(f.Random.Int(1, 4).ToString()))
+            .RuleFor(r => r.Type, f => f.PickRandom("Quarto simples", "Quarto com varanda", "Suíte", "Quarto com hidro"))
             .RuleFor(r => r.Price, f => f.Finance.Amount(50, 500));
 
         var hotelFaker = new Faker<Hotel>()
@@ -32,9 +33,9 @@ public class GeneratorImp : Generator
                 Latitude = f.Address.Latitude(),
                 City = f.Address.City()
             })
-            .RuleFor(e => e.Rooms, f => roomFaker.Generate(f.Random.Int(2, 10)));
+            .RuleFor(e => e.Rooms, f => roomFaker.Generate(f.Random.Int(0, 7)));
         hotelFaker.Locale = "pt_BR";
-        
+
         var hotels = hotelFaker.Generate(hotelQuantity);
         _applicationDbContext.Hotels.AddRange(hotels);
         _applicationDbContext.SaveChanges();
