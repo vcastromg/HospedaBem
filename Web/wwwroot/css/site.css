@@ -28,6 +28,10 @@ body {
   color: white;
 }
 
+.form-label {
+  font-weight: bold;
+}
+
 .logo img {
   width: 300px;
   margin-bottom: 20px;
