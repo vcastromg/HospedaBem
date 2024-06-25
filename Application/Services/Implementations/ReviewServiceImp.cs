@@ -8,11 +8,13 @@ public class ReviewServiceImp : ReviewService
 {
     private readonly ReviewRepository _reviewRepository;
     private readonly AppUserService _appUserService;
+    private readonly BookingService _bookingService;
 
-    public ReviewServiceImp(ReviewRepository reviewRepository, AppUserService appUserService)
+    public ReviewServiceImp(ReviewRepository reviewRepository, AppUserService appUserService, BookingService bookingService)
     {
         _reviewRepository = reviewRepository;
         _appUserService = appUserService;
+        _bookingService = bookingService;
     }
 
     public void CreateReview(CreateReviewDTO review)
@@ -23,14 +25,13 @@ public class ReviewServiceImp : ReviewService
         }
 
         var user = _appUserService.FindById(review.UserId);
-        //ToDo: consultar o booking a partir do Id passado na request
-        // var booking = _bookingService.FindById(review.BookingId); 
+        var booking = _bookingService.FindBookingById(review.BookingId);
 
         var newReview = new Review(
             review.Pros,
             review.Cons,
             review.Rate,
-            null,
+            booking,
             user);
 
         _reviewRepository.Add(newReview);

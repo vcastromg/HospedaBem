@@ -6,5 +6,6 @@ namespace Application.Repositories
     {
         public ICollection<Booking> GetBookingsByRoomId(long roomId);
         public ICollection<Booking> GetBookingsbyUser(string userId);
+        public Booking GetBookingById(long id);
     }
 }

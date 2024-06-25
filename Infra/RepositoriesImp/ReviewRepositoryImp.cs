@@ -17,7 +17,8 @@ public class ReviewRepositoryImp : BaseRepositoryImp<Review>, ReviewRepository
     {
         return Query()
             .AsNoTracking()
-            .Where(q => q.User.Id == userId)
+            .Include(q => q.Booking.Room) 
+            .Where(q =>  q.User.Id == userId)
             .ToList();
     }
 

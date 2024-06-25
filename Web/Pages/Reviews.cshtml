@@ -5,8 +5,24 @@
     ViewData["Title"] = "Avaliações";
 }
 
-<h1>Minhas avaliações</h1>
+<h1 class="display-4">Minhas avaliações</h1>
 
 <div>
-    <p>Avaliacao 1</p>
+    @if (Model._reviews == null)
+    {
+        <div>Nâo foram feitas avaliações</div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var review in Model._reviews)
+            {
+                <div class="col col-md-4">
+                    <div class="card">
+                        <h5>@review.Cons</h5>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
