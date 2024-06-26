@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-sm-12 col-lg-4 mt-3">
                 <label for="city" class="form-label">Cidade</label>
-                <input class="form-control" id="city" name="city" aria-describedby="cityHelp" required>
+                <input class="form-control" id="city" name="city" aria-describedby="cityHelp" required value="@Model.CitySearch">
                 <div id="cityHelp" class="form-text">Escolha um destino.</div>
             </div>
             <div class="col-12 col-lg-4 mt-3">
@@ -37,12 +37,12 @@
 {
     <hr class="hr my-4"/>
     <h2>Pesquisa por hotéis em "@Model.CitySearch"</h2>
-    <div class="row mt-4">
+    <div class="row">
         @foreach (var hotel in Model.HotelResults)
         {
-            <div class="col col-md-4">
+            <div class="col col-md-4 mt-4">
                 <div class="card">
-                    <img class="card-img-top" src="@hotel.CoverImageUrl" alt="Card image cap">
+                    <img class="card-img-top" src="@hotel.CoverImageUrl" alt="@hotel.Name Cover" height="310">
                     <div class="card-body">
                         <h5 class="card-title">@hotel.Name</h5>
                         <p class="card-text">@hotel.Address.City</p>
