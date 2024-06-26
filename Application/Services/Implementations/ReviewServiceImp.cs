@@ -37,7 +37,7 @@ public class ReviewServiceImp : ReviewService
         _reviewRepository.Add(newReview);
     }
 
-    public ICollection<Review> GetReviewsByUser(string userId)
+    public IList<Review> GetReviewsByUser(string userId)
     {
         return _reviewRepository.GetReviewsByUser(userId);
     }

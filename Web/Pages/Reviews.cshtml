@@ -5,7 +5,7 @@
     ViewData["Title"] = "Avaliações";
 }
 
-<h1 class="display-4">Minhas avaliações</h1>
+<h2 class="display-4">Minhas avaliações</h2>
 
 <div>
     @if (Model._reviews == null)
@@ -15,11 +15,26 @@
     else
     {
         <div class="row">
-            @foreach (var review in Model._reviews)
+            @for (int i = 0; i < @Model._reviews.Count; i++)
             {
                 <div class="col col-md-4">
-                    <div class="card">
-                        <h5>@review.Cons</h5>
+                    <div class="card p-1">
+                        <img class="card-img-top" src="@Model._hotels[i].CoverImageUrl" alt="Card image cap">
+                        <h5 class="mt-2">@Model._hotels[i].Name</h5>
+                        <div class="mx-3">
+                            <p>📌 @Model._hotels[i].Address.City</p>
+                            @if (@Model._hotels[i].Rooms != null)
+                            {
+                                <p>🏠 @Model._hotels[i].Rooms.First().Type</p>
+                            }
+                            else
+                            {
+                                <p>🏠 Quarto simples</p>
+                            }
+                            <p>👍 @Model._reviews[i].Pros</p>
+                            <p>👎 @Model._reviews[i].Cons</p>
+                            <p>⭐ @Model._reviews[i].Rate</p>
+                        </div>
                     </div>
                 </div>
             }

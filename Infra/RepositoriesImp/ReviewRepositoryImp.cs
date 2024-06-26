@@ -13,7 +13,7 @@ public class ReviewRepositoryImp : BaseRepositoryImp<Review>, ReviewRepository
         _applicationDbContext = applicationDbContext;
     }
 
-    public ICollection<Review> GetReviewsByUser(string userId)
+    public IList<Review> GetReviewsByUser(string userId)
     {
         return Query()
             .AsNoTracking()
