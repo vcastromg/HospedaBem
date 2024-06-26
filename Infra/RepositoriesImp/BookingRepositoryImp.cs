@@ -28,4 +28,11 @@ public class BookingRepositoryImp : BaseRepositoryImp<Booking>, BookingRepositor
             .Where(b => b.User.Id == userId)
             .ToList();   
     }
+
+    public Booking GetBookingById(long id)
+    {
+        return _applicationDbContext.Bookings
+            .Include(b => b.Room)
+            .SingleOrDefault(b => b.Id == id);
+    }
 }

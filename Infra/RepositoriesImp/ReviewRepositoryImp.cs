@@ -13,11 +13,12 @@ public class ReviewRepositoryImp : BaseRepositoryImp<Review>, ReviewRepository
         _applicationDbContext = applicationDbContext;
     }
 
-    public ICollection<Review> GetReviewsByUser(string userId)
+    public IList<Review> GetReviewsByUser(string userId)
     {
         return Query()
             .AsNoTracking()
-            .Where(q => q.User.Id == userId)
+            .Include(q => q.Booking.Room) 
+            .Where(q =>  q.User.Id == userId)
             .ToList();
     }
 

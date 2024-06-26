@@ -92,7 +92,7 @@ public class BookingServiceImp : BookingService
 
     public Booking FindBookingById(string id)
     {
-        var booking = _bookingRepository.GetById(long.Parse(id));
+        var booking = _bookingRepository.GetBookingById(long.Parse(id));
         if (booking == null)
         {
             throw new Exception("Booking not found");

@@ -5,8 +5,39 @@
     ViewData["Title"] = "Avaliações";
 }
 
-<h1>Minhas avaliações</h1>
+<h2 class="display-4">Minhas avaliações</h2>
 
 <div>
-    <p>Avaliacao 1</p>
+    @if (Model._reviews == null)
+    {
+        <div>Nâo foram feitas avaliações</div>
+    }
+    else
+    {
+        <div class="row">
+            @for (int i = 0; i < @Model._reviews.Count; i++)
+            {
+                <div class="col col-md-4">
+                    <div class="card p-1">
+                        <img class="card-img-top" src="@Model._hotels[i].CoverImageUrl" alt="Card image cap">
+                        <h5 class="mt-2">@Model._hotels[i].Name</h5>
+                        <div class="mx-3">
+                            <p>📌 @Model._hotels[i].Address.City</p>
+                            @if (@Model._hotels[i].Rooms != null)
+                            {
+                                <p>🏠 @Model._hotels[i].Rooms.First().Type</p>
+                            }
+                            else
+                            {
+                                <p>🏠 Quarto simples</p>
+                            }
+                            <p>👍 @Model._reviews[i].Pros</p>
+                            <p>👎 @Model._reviews[i].Cons</p>
+                            <p>⭐ @Model._reviews[i].Rate</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
