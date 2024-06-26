@@ -44,6 +44,7 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
     {
         return _applicationDbContext.Hotels
             .Include(q => q.Address)
+            .Include(q => q.Rooms)
             .Skip(position)
             .Take(1)
             .First();
