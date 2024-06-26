@@ -54,6 +54,7 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
         return _applicationDbContext.Hotels
             .Include(q => q.Rooms)
             .Include(q => q.Address)
+            .Include(q => q.Manager)
             .AsNoTracking()
             .FirstOrDefault(q => q.Id == id);
 
