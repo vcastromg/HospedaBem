@@ -1,18 +1,51 @@
-@page "{id}"
+@page
 @model HotelModel
+
 @{
     ViewData["Title"] = "Hotel";
 }
 
 <div class="d-flex">
-    <div>
+    <div style="width: 100%">
         <h1 class="display-4">@Model.Hotel.Name</h1>
         <p>Hotel em @Model.Hotel.Address.AddressLine, @Model.Hotel.Address.City, @Model.Hotel.Address.PostalCode</p>
         <p>Gerente: @Model.Hotel.Manager.UserName</p>
+        @if (Model.CheckIn == null && Model.CheckOut == null)
+        {
+            <form method="get" style="width: 100%">
+                <div class="row">
+                    <div class="col-12 col-lg-4 mt-3">
+                        <label asp-for="CheckIn" class="form-label">Check-in</label>
+                        <input type="date" class="form-control" asp-for="CheckIn">
+                        <div id="checkinHelp" class="form-text">A data que você deseja iniciar sua estadia.</div>
+                    </div>
+                    <div class="col-12 col-lg-4 mt-3">
+                        <label asp-for="CheckOut" class="form-label">Check-out</label>
+                        <input type="date" class="form-control" asp-for="CheckOut">
+                        <div id="checkoutHelp" class="form-text">A data que você deseja finalizar sua estadia.</div>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            <form method="get" style="width: 100%">
+                <div class="row">
+                    <div class="col-12 col-lg-4 mt-3">
+                        <label asp-for="CheckIn" class="form-label">Check-in</label>
+                        @Model.CheckIn!.Value.ToString("MM/dd/yyyy")
+                    </div>
+                    <div class="col-12 col-lg-4 mt-3">
+                        <label asp-for="CheckOut" class="form-label">Check-out</label>
+                        @Model.CheckOut!.Value.ToString("MM/dd/yyyy")
+                    </div>
+                </div>
+            </form>
+        }
     </div>
     <div style="
         background-image: url('@Model.Hotel.CoverImageUrl');
-        height: 10rem;
+        height: 15rem;
         width: 40%;
         background-size: cover;
         background-position: center center;
@@ -37,7 +70,13 @@
                             <p class="text-primary">
                                 Diária por R$ @room.Price
                             </p>
-                            <a href="#" class="btn btn-primary w-100 mt-auto">Reservar</a>
+                            <form method="post" asp-page="/Bookings" class="mt-auto">
+                                <input hidden name="roomId" value="@room.Id"/>
+                                <input hidden name="checkIn" value="@Model.CheckIn"/>
+                                <input hidden name="checkOut" value="@Model.CheckOut"/>
+                                <button type="submit" class="btn btn-primary w-100">Reservar</button>
+                            </form>
+                            @* <a asp-page="/Bookings" class="btn btn-primary w-100 mt-auto">Reservar</a> *@
                         </div>
                     </div>
                 </div>
