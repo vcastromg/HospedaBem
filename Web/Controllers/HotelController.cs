@@ -59,12 +59,12 @@ public class HotelController : ControllerBase
         return Ok(_hotelService.GetHotelsByRate(rate));
     }
 
-    [HttpGet]
-    [Route("/api/hotel/rooms/{id}")]
-    public IActionResult ListAvailableRoomsInHotel([FromRoute] string id)
-    {
-        return Ok(_hotelService.GetAvailableRoomsInHotel(id));
-    }
+    // [HttpGet]
+    // [Route("/api/hotel/rooms/{id}")]
+    // public IActionResult ListAvailableRoomsInHotel([FromRoute] string id)
+    // {
+    //     return Ok(_hotelService.GetAvailableRoomsInHotel(id));
+    // }
 
     [HttpGet]
     [Route("{id}")]
