@@ -124,9 +124,9 @@ public class HotelServiceImp : HotelService
         return _hotelRepository.GetHotelsByRate(double.Parse(rate));
     }
 
-    public ICollection<Room> GetAvailableRoomsInHotel(string hotelId)
+    public ICollection<Room> GetAvailableRoomsInHotel(string hotelId, DateTime? checkIn, DateTime? checkOut)
     {
-        return _hotelRepository.GetRoomsAvailableInHotel(long.Parse(hotelId));
+        return _hotelRepository.GetRoomsAvailableInHotel(long.Parse(hotelId), checkIn, checkOut);
     }
 
     public Hotel? GetHotelById(long id)

@@ -1,0 +1,37 @@
+@page
+@model BookingsModel
+@{
+    ViewData["Title"] = "Minhas reservas";
+}
+
+<h1 class="display-4">Minhas reservas</h1>
+
+<div>
+    @if (Model.Bookings == null || !Model.Bookings.Any())
+    {
+        <div>Não há reservas.</div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var booking in Model.Bookings)
+            {
+                <div class="col-12 col-md-3 p-4">
+                    <div class="card text-center" style="min-height: 10.6rem">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@booking.Room.Hotel.Name</h5>
+                            <h5 class="card-title">@booking.Room.Type para @booking.Room.GuestsCapacity @(booking.Room.GuestsCapacity == 1 ? "pessoa" : "pessoas")</h5>
+                            <br/>
+                            <p>Check-in: @booking.CheckIn</p>
+                            <p>Check-out: @booking.CheckOut</p>
+                            <p class="text-primary">
+                                Custo de R$ @booking.Room.Price
+                            </p>
+                            <a class="btn btn-danger w-100 mt-auto">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

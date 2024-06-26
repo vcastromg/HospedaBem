@@ -12,9 +12,9 @@ public class DebugController : ControllerBase
     }
     
     [HttpGet("PopulateDb")]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        _generator.GenerateHotels(1000);
+        await _generator.GenerateHotels(1000);
         return Ok();
     }
 }

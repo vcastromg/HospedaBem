@@ -14,7 +14,7 @@ public interface HotelService
     void UpdateHotelCoverImage(long hotelId, string imageUrl);
     IEnumerable<Hotel> GetRoomsByHotelId(long hotelId);
     ICollection<Hotel> GetHotelsByRate(string rate);
-    ICollection<Room> GetAvailableRoomsInHotel(string hotelId);
+    ICollection<Room> GetAvailableRoomsInHotel(string hotelId, DateTime? checkIn, DateTime? checkOut);
     Hotel? GetHotelById(long id);
     IEnumerable<Hotel> Search(HotelSearchDto dto);
 }

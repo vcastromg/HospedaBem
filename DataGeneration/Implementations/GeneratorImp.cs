@@ -1,19 +1,23 @@
 using Bogus;
+using Domain;
 using Domain.Entities;
 using Infra;
+using Microsoft.AspNetCore.Identity;
 
 namespace DataGeneration.Implementations;
 
 public class GeneratorImp : Generator
 {
     private readonly ApplicationDbContext _applicationDbContext;
+    private readonly UserManager<AppUser> _userManager;
 
-    public GeneratorImp(ApplicationDbContext applicationDbContext) : base()
+    public GeneratorImp(ApplicationDbContext applicationDbContext, UserManager<AppUser> userManager) : base()
     {
         _applicationDbContext = applicationDbContext;
+        _userManager = userManager;
     }
 
-    public void GenerateHotels(int hotelQuantity)
+    public async Task GenerateHotels(int hotelQuantity)
     {
         var roomFaker = new Faker<Room>()
             .RuleFor(r => r.GuestsCapacity, f => UInt16.Parse(f.Random.Int(1, 4).ToString()))
@@ -35,8 +39,24 @@ public class GeneratorImp : Generator
             })
             .RuleFor(e => e.Rooms, f => roomFaker.Generate(f.Random.Int(0, 7)));
         hotelFaker.Locale = "pt_BR";
-
         var hotels = hotelFaker.Generate(hotelQuantity);
+
+        foreach (var hotel in hotels)
+        {
+            var fakeEmail = new Faker().Person.Email;
+            await _userManager.CreateAsync(new AppUser
+            {
+                Email = fakeEmail,
+                UserName = fakeEmail
+            });
+            var newUser = await _userManager.FindByEmailAsync(fakeEmail);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(newUser!);
+
+            await _userManager.ResetPasswordAsync(newUser!, token, "123");
+
+            hotel.Manager = newUser!;
+        }
+        
         _applicationDbContext.Hotels.AddRange(hotels);
         _applicationDbContext.SaveChanges();
     }

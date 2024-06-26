@@ -8,4 +8,5 @@ public class Room: BaseEntity
     public decimal Price { get; set; }
     public string Type { get; set; }
     public virtual Hotel Hotel { get; set; }
+    public virtual ICollection<Booking>? Bookings { get; set; }
 }

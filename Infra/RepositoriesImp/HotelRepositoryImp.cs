@@ -31,12 +31,13 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
             .ToList();
     }
 
-    public ICollection<Room> GetRoomsAvailableInHotel(long hotelId)
+    public ICollection<Room> GetRoomsAvailableInHotel(long hotelId, DateTime? checkIn, DateTime? checkOut)
     {
-        return _applicationDbContext.Hotels
-            .Where(hotel => hotel.Id == hotelId)
-            .SelectMany(hotel => hotel.Rooms)
-            .Where(room => room.IsAvailable)
+        return _applicationDbContext.Rooms
+            .Include(q => q.Bookings)
+            .Include(q => q.Hotel)
+            .Where(q => q.Hotel.Id == hotelId)
+            .Where(q => !q.Bookings.Any(r => r.CheckIn >= checkIn && r.CheckOut <= checkOut))
             .ToList();
     }
 
@@ -44,6 +45,7 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
     {
         return _applicationDbContext.Hotels
             .Include(q => q.Address)
+            .Include(q => q.Rooms)
             .Skip(position)
             .Take(1)
             .First();
@@ -54,6 +56,7 @@ public class HotelRepositoryImp : BaseRepositoryImp<Hotel>, HotelRepository
         return _applicationDbContext.Hotels
             .Include(q => q.Rooms)
             .Include(q => q.Address)
+            .Include(q => q.Manager)
             .AsNoTracking()
             .FirstOrDefault(q => q.Id == id);
 

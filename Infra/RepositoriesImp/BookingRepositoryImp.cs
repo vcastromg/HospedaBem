@@ -25,6 +25,7 @@ public class BookingRepositoryImp : BaseRepositoryImp<Booking>, BookingRepositor
     {
         return _applicationDbContext.Bookings
             .Include(b => b.Room)
+            .ThenInclude(q => q.Hotel)
             .Where(b => b.User.Id == userId)
             .ToList();   
     }

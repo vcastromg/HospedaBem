@@ -1,7 +1,7 @@
 ﻿using Application.Repositories;
 using Domain;
-using Domain.Entities;
 using DTOs;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Services.Implementations;
 
@@ -10,12 +10,14 @@ public class BookingServiceImp : BookingService
     private readonly BookingRepository _bookingRepository;
     private readonly RoomService _roomService;
     private readonly AppUserService _userService;
+    private readonly UserManager<AppUser> _userManager;
 
-    public BookingServiceImp(BookingRepository bookingRepository, RoomService roomService, AppUserService userService)
+    public BookingServiceImp(BookingRepository bookingRepository, RoomService roomService, AppUserService userService, UserManager<AppUser> userManager)
     {
         _bookingRepository = bookingRepository;
         _roomService = roomService;
         _userService = userService;
+        _userManager = userManager;
     }
 
     public void Book(CreateBookingDTO dto)
@@ -103,12 +105,6 @@ public class BookingServiceImp : BookingService
 
     public IEnumerable<Booking> FindBookingsByUser(string userId)
     {
-        var bookings = _bookingRepository.GetBookingsbyUser(userId);
-        if (bookings == null)
-        {
-            throw new Exception("Bookings not found");
-        }
-
-        return bookings;
+        return _bookingRepository.GetBookingsbyUser(userId);;
     }
 }
