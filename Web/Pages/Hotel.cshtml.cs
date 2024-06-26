@@ -1,3 +1,4 @@
+using System.Globalization;
 using Application.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ public class HotelModel : PageModel
 {
     private readonly HotelService _hotelService;
     public Hotel? Hotel;
+    public string MapUrl;
 
     public HotelModel(HotelService hotelService)
     {
@@ -23,6 +25,10 @@ public class HotelModel : PageModel
             return NotFound();
         }
 
+        var latitude = Hotel.Address.Latitude;
+        var longitude = Hotel.Address.Longitude;
+        var mapBbox = $"{(longitude - 0.005).ToString(CultureInfo.InvariantCulture)},{(latitude - 0.005).ToString(CultureInfo.InvariantCulture)},{(longitude + 0.005).ToString(CultureInfo.InvariantCulture)},{(latitude + 0.005).ToString(CultureInfo.InvariantCulture)}";
+        MapUrl = $"https://www.openstreetmap.org/export/embed.html?bbox={mapBbox}&layer=mapnik&marker={latitude.ToString(CultureInfo.InvariantCulture)}%2C{longitude.ToString(CultureInfo.InvariantCulture)}";
         return Page();
     }
 }
