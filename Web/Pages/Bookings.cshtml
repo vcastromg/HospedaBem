@@ -21,10 +21,13 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">@booking.Room.Hotel.Name</h5>
                             <h5 class="card-title">@booking.Room.Type para @booking.Room.GuestsCapacity @(booking.Room.GuestsCapacity == 1 ? "pessoa" : "pessoas")</h5>
+                            <br/>
+                            <p>Check-in: @booking.CheckIn</p>
+                            <p>Check-out: @booking.CheckOut</p>
                             <p class="text-primary">
                                 Custo de R$ @booking.Room.Price
                             </p>
-                            <a href="#" class="btn btn-danger w-100 mt-auto">Cancelar</a>
+                            <a class="btn btn-danger w-100 mt-auto">Cancelar</a>
                         </div>
                     </div>
                 </div>
