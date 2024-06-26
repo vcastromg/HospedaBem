@@ -13,20 +13,27 @@ public class IndexModel : PageModel
         _hotelService = hotelService;
     }
     public string? CitySearch { get; set; }
+    public DateTime? CheckIn { get; set; }
+    public DateTime? CheckOut { get; set; }
     public IEnumerable<Hotel>? HotelResults { get; set; }
     
-    public void OnGet(string? city)
+    public void OnGet(string? citySearch, DateTime? checkIn, DateTime? checkOut)
     {
         var search = new HotelSearchDto
         {
-            CityName = city
+            CityName = citySearch,
+            MininumDate = CheckIn,
+            MaximumDate = CheckOut
         };
         
-        if(!string.IsNullOrWhiteSpace(city))
-        {
-            CitySearch = city;
-        }
-        
         HotelResults = _hotelService.Search(search);
+        
+        if(!string.IsNullOrWhiteSpace(citySearch))
+        {
+            CitySearch = citySearch;
+        }
+
+        CheckIn = checkIn;
+        CheckOut = checkOut;
     }
 }

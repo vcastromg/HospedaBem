@@ -1,4 +1,5 @@
-@page "{city?}"
+@page "{citySearch?}/{checkIn?}/{checkOut?}"
+@using Domain.Entities
 @model IndexModel
 
 @{
@@ -13,18 +14,18 @@
     <form method="get">
         <div class="row">
             <div class="col-sm-12 col-lg-4 mt-3">
-                <label for="city" class="form-label">Cidade</label>
-                <input class="form-control" id="city" name="city" aria-describedby="cityHelp" required value="@Model.CitySearch">
-                <div id="cityHelp" class="form-text">Escolha um destino.</div>
+                <label asp-for="CitySearch" class="form-label">Cidade</label>
+                <input class="form-control" asp-for="CitySearch" required/>
+                <div class="form-text">Escolha um destino.</div>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="checkin" class="form-label">Check-in</label>
-                <input type="date" class="form-control" id="checkin" aria-describedby="checkinHelp">
+                <input type="date" class="form-control" asp-for="CheckIn">
                 <div id="checkinHelp" class="form-text">A data que você deseja iniciar sua estadia.</div>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="checkout" class="form-label">Check-out</label>
-                <input type="date" class="form-control" id="checkout" aria-describedby="checkoutHelp">
+                <input type="date" class="form-control" asp-for="CheckOut">
                 <div id="checkoutHelp" class="form-text">A data que você deseja finalizar sua estadia.</div>
             </div>
         </div>
@@ -49,13 +50,19 @@
                         <div class="d-flex justify-content-between">
                             @if (@hotel.Rooms!.Count == 1)
                             {
-                            <small>1 quarto disponível</small>
+                                <small>1 quarto disponível</small>
                             }
                             else
                             {
-                            <small>@hotel.Rooms.Count quartos disponíveis</small>
+                                <small>@hotel.Rooms.Count quartos disponíveis</small>
                             }
-                            <a class="btn btn-secondary" asp-area="" asp-page="/hotel" asp-route-id="@hotel.Id">Ver hotel</a>
+                            <form method="get" asp-page="hotel">
+                                <input hidden name="id" value="@hotel.Id"/>
+                                <input hidden name="checkIn" value="@Model.CheckIn"/>
+                                <input hidden name="checkOut" value="@Model.CheckOut"/>
+                                <button class="btn btn-secondary" type="submit">Ver hotel</button>
+                                @* <a class="btn btn-secondary" asp-area="" asp-page="/hotel" asp-route-id="@hotel.Id" asp-route-checkIn="@Model.CheckIn">Ver hotel</a> *@
+                            </form>
                         </div>
                     </div>
                 </div>
