@@ -7,9 +7,9 @@ namespace Infra.Repositories.Implementations;
 public class AppUserRepositoryImp : BaseRepositoryImp<IdentityUser>, AppUserRepository
 {
     private readonly ApplicationDbContext _applicationDbContext;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<AppUser> _userManager;
 
-    public AppUserRepositoryImp(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager) :
+    public AppUserRepositoryImp(ApplicationDbContext applicationDbContext, UserManager<AppUser> userManager) :
         base(applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;

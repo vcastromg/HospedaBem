@@ -2,5 +2,5 @@ namespace DataGeneration;
 
 public interface Generator
 {
-    void GenerateHotels(int hotelQuantity);
+    Task GenerateHotels(int hotelQuantity);
 }

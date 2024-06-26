@@ -3,6 +3,7 @@ using Application.Services;
 using Application.Services.Implementations;
 using DataGeneration;
 using DataGeneration.Implementations;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Infra;
@@ -19,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(
+builder.Services.AddDefaultIdentity<AppUser>(
         options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -36,6 +37,7 @@ builder.Services.AddScoped<ReviewRepository, ReviewRepositoryImp>();
 builder.Services.AddScoped<ReviewService, ReviewServiceImp>();
 builder.Services.AddScoped<AppUserRepository, AppUserRepositoryImp>();
 builder.Services.AddScoped<AppUserService, AppUserServiceImp>();
+// builder.Services.AddScoped<UserManager<AppUser>, AppUserServiceImp>();
 builder.Services.AddScoped<BookingRepository, BookingRepositoryImp>();
 builder.Services.AddScoped<BookingService, BookingServiceImp>();
 builder.Services.AddScoped<Generator, GeneratorImp>();
