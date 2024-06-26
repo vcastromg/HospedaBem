@@ -4,19 +4,21 @@
     ViewData["Title"] = "Hotel";
 }
 
-<h1 class="display-4">@Model.Hotel.Name</h1>
-<p>Hotel em @Model.Hotel.Address.AddressLine, @Model.Hotel.Address.City, @Model.Hotel.Address.PostalCode</p>
-
-<div style="
-    background-image: url('@Model.Hotel.CoverImageUrl'); 
-    height: 5rem;
-    background-size: cover;
-    background-position: center center;">
+<div class="d-flex">
+    <div>
+        <h1 class="display-4">@Model.Hotel.Name</h1>
+        <p>Hotel em @Model.Hotel.Address.AddressLine, @Model.Hotel.Address.City, @Model.Hotel.Address.PostalCode</p>
+        <p>Gerente: @Model.Hotel.Manager.UserName</p>
+    </div>
+    <div style="
+        background-image: url('@Model.Hotel.CoverImageUrl');
+        height: 10rem;
+        width: 40%;
+        background-size: cover;
+        background-position: center center;
+        margin-left: auto;">
+    </div>
 </div>
-
-<p class="mt-4">Gerente: @Model.Hotel.Manager.UserName</p>
-
-<hr class="hr"/>
 
 <div>
     @if (Model.Hotel.Rooms == null || Model.Hotel.Rooms.Count == 0)
