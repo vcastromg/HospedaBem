@@ -16,4 +16,5 @@ public class Hotel: BaseEntity
     
     public virtual Address Address { get; set; }
     public virtual ICollection<Room>? Rooms { get; set; }
+    public virtual AppUser Manager { get; set; }
 }

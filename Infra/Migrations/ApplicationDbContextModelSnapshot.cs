@@ -104,6 +104,9 @@ namespace Infra.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ManagerId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -117,6 +120,8 @@ namespace Infra.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Hotels");
                 });
@@ -417,7 +422,7 @@ namespace Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.AppUser", "User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
@@ -434,7 +439,13 @@ namespace Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.AppUser", "Manager")
+                        .WithMany("Hotels")
+                        .HasForeignKey("ManagerId");
+
                     b.Navigation("Address");
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("Domain.Entities.Room", b =>
@@ -519,6 +530,11 @@ namespace Infra.Migrations
             modelBuilder.Entity("Domain.Entities.Hotel", b =>
                 {
                     b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("Domain.AppUser", b =>
+                {
+                    b.Navigation("Hotels");
                 });
 #pragma warning restore 612, 618
         }

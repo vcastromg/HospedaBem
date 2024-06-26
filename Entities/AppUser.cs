@@ -5,5 +5,5 @@ namespace Domain;
 
 public class AppUser : IdentityUser
 {
-    
+    public virtual Hotel[]? Hotels { get; set; }
 }
