@@ -120,11 +120,11 @@ Um sistema web para agendamento de hospedagem em hoteis.
 **História #1:** Como viajante, gostaria de pesquisar acomodações disponíveis em um hotel. <br>
 **Tarefas e responsáveis:**
 - Criar esqueleto do projeto utilizando .Net
-- Esboço de um diagrama ER para melhor entendimento no backend
+- Esboço de um diagrama ER para melhor entendimento no backend (Lucas)
 - Configurar banco de dados sqlite
 - Criar classes de domínio para Hotel, Room, Booking e Guest, e instanciar as tabelas referentes
-- Criar e testar primeira rota usando Asp.Net
-- Implementar no backend a lógica de pesquisar e listar acomodações disponíveis de um hotel
+- Criar e testar primeira rota usando Asp.Net (Lucas)
+- Implementar no backend a lógica de pesquisar e listar acomodações disponíveis de um hotel (Lucas)
 - Desenvolver tela principal de usuário para pesquisar acomodações
 - Ajustar tela de usuário para apresentar a lista de acomodações
 
@@ -136,15 +136,15 @@ Um sistema web para agendamento de hospedagem em hoteis.
   
 **História #3:** Como viajante, gostaria de pesquisar acomodações disponíveis em uma cidade. <br>
 **Tarefas e responsáveis:**
-- Implementar no backend lógica de consulta filtrada por certa localidade
+- Implementar no backend lógica de consulta filtrada por certa localidade (Lucas)
 - Configurar rota de consulta de acomodações para receber filtro de localidade
 - Adaptar tela de consulta feita por usuário para apresentar acomodações seguindo nova filtragem
 
 **História #4:** Como viajante, gostaria de reservar uma acomodação em um hotel. <br>
 **Tarefas e responsáveis:**
-- Criar lógica para verificar disponibilidade de datas para um quarto (André Luiz)
-- Criar lógica de vincular um usuário para uma reserva de determinada acomodação, verificando disponibilidade (André Luiz)
-- Criar uma rota do tipo Post para permitir a reserva
+- Criar lógica para verificar disponibilidade de datas para um quarto (André Luiz e Lucas)
+- Criar lógica de vincular um usuário para uma reserva de determinada acomodação, verificando disponibilidade (André Luiz e Lucas)
+- Criar uma rota do tipo Post para permitir a reserva (Lucas)
 - Adaptar tela de consulta de acomodações, apresentando botão para reservar
 
 **História #5:** Como viajante, gostaria de editar e cancelar uma acomodação já reservada. <br>
@@ -157,8 +157,8 @@ Um sistema web para agendamento de hospedagem em hoteis.
 **História #6:** Como gerente de um hotel, gostaria de me cadastar no sistema e ter uma página de hospedagem no sistema. <br>
 **Tarefas e responsáveis:**
 - Verificar e ajustar tabela no banco de dados para que fique de acordo com a entidade Hotel e Quarto
-- Criar lógica no backend que permita o cadastro de novo hotel no sistema
-- Criar nova rota que permita o usuário se cadastrar novo hotel
+- Criar lógica no backend que permita o cadastro de novo hotel no sistema (Lucas)
+- Criar nova rota que permita o usuário se cadastrar novo hotel (Lucas)
 - Implementar tela que permita usuário cadastrar seu hotel no sistema
 
 **História #7:** Como gerente de um hotel, gostaria de editar e deletar minha página de hospedagem no sistema. <br>
@@ -167,6 +167,12 @@ Um sistema web para agendamento de hospedagem em hoteis.
 - Desenvolver nova rota que permita edição/deleção de um hotel para o frontend (André Luiz)
 - Implementar tela de edição de informações de um hotel
 - Implementar tela de confirmação de deleção de hotel do sistema
+
+**História #8:** Como viajante, gostaria de ver as avaliações que fiz e poder deletá-las.
+- Criar lógica no backend que permita criação de uma avaliação de um booking já feito (Lucas)
+- Criar lógica no backend que permita usuário deletar uma avaliação feita por este mesmo usuário (Lucas)
+- Desenvolver nova rota que permita criação/deleção de uma avaliação para o frontend (Lucas)
+- Implementar tela que liste as avaliações feitas por um usuário (Lucas)
 
 **História #8:** Como gerente de um hotel, gostaria de visualizar as reservas feitas em minhas acomodações <br>
 - Implementar lógica que permita listar as reservas feitas no hotel administrado pelo gerente
