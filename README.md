@@ -114,3 +114,61 @@ Um sistema web para agendamento de hospedagem em hoteis.
 - Implementar lógica que permita listar as reservas feitas no hotel administrado pelo gerente (André Luiz)
 - Desenvolver rota que permita frontend ter acesso a listagem de acomodações (André Luiz)
 - Implementar tela que permita visualização das reservas feitas (Victor Castro)
+
+## Backlog da sprint (nova versão)
+
+**História #1:** Como viajante, gostaria de pesquisar acomodações disponíveis em um hotel. <br>
+**Tarefas e responsáveis:**
+- Criar esqueleto do projeto utilizando .Net (Victor)
+- Esboço de um diagrama ER para melhor entendimento no backend (Lucas)
+- Configurar banco de dados sqlite (Victor)
+- Criar classes de domínio para Hotel, Room, Booking e Guest, e instanciar as tabelas referentes (Victor)
+- Criar e testar primeira rota usando Asp.Net (Lucas)
+- Implementar no backend a lógica de pesquisar e listar acomodações disponíveis de um hotel (Lucas)
+- Desenvolver tela principal de usuário para pesquisar acomodações (Victor e Erico)
+- Ajustar tela de usuário para apresentar a lista de acomodações (Victor e Erico)
+
+**História #2:** Como viajante, gostaria de pesquisar acomodações disponíveis em um certo intervalo de dias. <br>
+**Tarefas e responsáveis:**
+- Criar consulta de quartos disponíveis para certo intervalo de dias (Victor)
+- Configurar rota de consulta de acomodações para receber filtro de dias (Victor)
+- Ajustar tela de usuário feita por usuário para apresentar nova lista filtrada de acomodações (Victor e Erico)
+  
+**História #3:** Como viajante, gostaria de pesquisar acomodações disponíveis em uma cidade. <br>
+**Tarefas e responsáveis:**
+- Implementar no backend lógica de consulta filtrada por certa localidade (Lucas)
+- Configurar rota de consulta de acomodações para receber filtro de localidade (Victor)
+- Adaptar tela de consulta feita por usuário para apresentar acomodações seguindo nova filtragem (Victor e Erico)
+
+**História #4:** Como viajante, gostaria de reservar uma acomodação em um hotel. <br>
+**Tarefas e responsáveis:**
+- Criar lógica para verificar disponibilidade de datas para um quarto (André Luiz e Lucas)
+- Criar lógica de vincular um usuário para uma reserva de determinada acomodação, verificando disponibilidade (André Luiz e Lucas)
+- Criar uma rota do tipo Post para permitir a reserva (Lucas)
+- Adaptar tela de consulta de acomodações, apresentando botão para reservar (Victor e Erico)
+
+**História #5:** Como viajante, gostaria de editar e cancelar uma acomodação já reservada. <br>
+**Tarefas e responsáveis:**
+- Criar lógica no backend que permita edição de data/horário de uma reserva para outra que esteja disponível (André Luiz)
+- Criar lógica no backend que permita a deleção de uma determinada reserva feita pelo usuário (André Luiz)
+- Criar tela que lista as reservas feitas pelo usuário (Victor e Erico)
+- Adaptar tela de listagem de reservas para apresentar opção de deletar reserva (Victor e Erico)
+
+**História #6:** Como gerente de um hotel, gostaria de me cadastar no sistema e ter uma página de hospedagem no sistema. <br>
+**Tarefas e responsáveis:**
+- Verificar e ajustar tabela no banco de dados para que fique de acordo com a entidade Hotel e Quarto (Victor)
+- Criar lógica no backend que permita o cadastro de novo hotel no sistema (Lucas)
+- Criar nova rota que permita o usuário se cadastrar novo hotel (Lucas)
+- Implementar tela que permita usuário cadastrar seu hotel no sistema (Victor e Erico)
+
+**História #7:** Como gerente de um hotel, gostaria de editar e deletar minha página de hospedagem no sistema. <br>
+- Criar lógica no backend que permita edição de informações a respeito do hotel previamente cadastrado no sistema (André Luiz)
+- Criar lógica no backend que permita deleção de um hotel no sistema (André Luiz)
+- Desenvolver nova rota que permita edição/deleção de um hotel para o frontend (André Luiz)
+- Implementar tela de confirmação de deleção de hotel do sistema (Victor e Erico)
+
+**História #8:** Como viajante, gostaria de ver as avaliações que fiz e poder deletá-las.
+- Criar lógica no backend que permita criação de uma avaliação de um booking já feito (Lucas)
+- Criar lógica no backend que permita usuário deletar uma avaliação feita por este mesmo usuário (Lucas)
+- Desenvolver nova rota que permita criação/deleção de uma avaliação para o frontend (Lucas)
+- Implementar tela que liste as avaliações feitas por um usuário (Lucas)
