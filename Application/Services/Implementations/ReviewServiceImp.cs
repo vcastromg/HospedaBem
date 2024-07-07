@@ -60,6 +60,7 @@ public class ReviewServiceImp : ReviewService
         if (existingReview != null)
         {
             _reviewRepository.Delete(id);
+            return;
         }
         
         throw new Exception("Review not found");

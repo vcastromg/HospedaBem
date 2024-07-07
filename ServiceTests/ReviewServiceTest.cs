@@ -147,7 +147,7 @@ public class ReviewServiceTest
         var bookingServiceMock = new Mock<BookingService>();
         var reviewService = new ReviewServiceImp(reviewRepositoryMock.Object, appUserServiceMock.Object,
             bookingServiceMock.Object);
-        var existingReview = new Review { Id = reviewId, Pros = "Good review", Cons = "None", Rate = 4.0 };
+        var existingReview = new Review { Pros = "Good review", Cons = "None", Rate = 4 };
         
         reviewRepositoryMock.Setup(repo => repo.GetById(reviewId))
             .Returns(existingReview);
@@ -163,7 +163,10 @@ public class ReviewServiceTest
         // Arrange
         var reviewId = "102"; // Substitua por um ID inexistente
         var reviewRepositoryMock = new Mock<ReviewRepository>();
-        var reviewService = new ReviewServiceImp(reviewRepositoryMock.Object);
+        var appUserServiceMock = new Mock<AppUserService>();
+        var bookingServiceMock = new Mock<BookingService>();
+        var reviewService = new ReviewServiceImp(reviewRepositoryMock.Object, appUserServiceMock.Object,
+            bookingServiceMock.Object);
 
         // Configurar o comportamento do mock para retornar null (avaliação não encontrada)
         reviewRepositoryMock.Setup(repo => repo.GetById(reviewId))
