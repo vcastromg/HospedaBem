@@ -14,7 +14,7 @@ public class DebugController : ControllerBase
     [HttpGet("PopulateDb")]
     public async Task<IActionResult> Index()
     {
-        await _generator.GenerateHotels(1000);
+         _generator.GenerateHotels(1000);
         return Ok();
     }
 }
