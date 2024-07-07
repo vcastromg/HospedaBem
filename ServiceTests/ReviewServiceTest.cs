@@ -160,19 +160,16 @@ public class ReviewServiceTest
     [Fact]
     public void DeleteReview_ShouldThrowException_WhenReviewNotFound()
     {
-        // Arrange
-        var reviewId = "102"; // Substitua por um ID inexistente
+        var reviewId = "102";
         var reviewRepositoryMock = new Mock<ReviewRepository>();
         var appUserServiceMock = new Mock<AppUserService>();
         var bookingServiceMock = new Mock<BookingService>();
         var reviewService = new ReviewServiceImp(reviewRepositoryMock.Object, appUserServiceMock.Object,
             bookingServiceMock.Object);
-
-        // Configurar o comportamento do mock para retornar null (avaliação não encontrada)
+        
         reviewRepositoryMock.Setup(repo => repo.GetById(reviewId))
             .Returns((Review)null);
-
-        // Act e Assert
+        
         Assert.Throws<Exception>(() => reviewService.DeleteReview(reviewId));
     }
 }
