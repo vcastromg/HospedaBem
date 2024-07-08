@@ -114,11 +114,6 @@ public class HotelServiceImp : HotelService
         _hotelRepository.Update(hotel);
     }
 
-    public IEnumerable<Hotel> GetRoomsByHotelId(long hotelId)
-    {
-        throw new NotImplementedException();
-    }
-
     public ICollection<Hotel> GetHotelsByRate(string rate)
     {
         return _hotelRepository.GetHotelsByRate(double.Parse(rate));
