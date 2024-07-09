@@ -3,6 +3,7 @@ using Application.Services;
 using Application.Services.Implementations;
 using Domain;
 using Domain.Entities;
+using DTOs;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 
@@ -140,5 +141,101 @@ public class BookingServiceTest
                                                    userServiceMock.Object, this.userManagerMock.Object);
 
         Assert.Throws<ArgumentException>(() => bookingService.CheckRoomAvailabilityWithinPeriod(1, new DateTime(2000, 01, 02), new DateTime(2000, 01, 01)));
+    }
+
+    [Fact]
+    public void Book_ShouldThrowException_WhenRoomIsNotAvailableWithinPeriod()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        var room = new Room { Id = 1 };
+        var booking = new Booking
+        {
+            CheckIn = new DateTime(2000, 01, 01),
+            CheckOut = new DateTime(2000, 01, 02),
+            Room = room,
+            User = new IdentityUser()
+        };
+        bookingRepositoryMock.Setup(repo => repo.GetBookingsByRoomId(room.Id))
+            .Returns(new List<Booking>() { booking });
+        roomServiceMock.Setup(sv => sv.FindRoomById(room.Id.ToString()))
+            .Returns(room);
+        userServiceMock.Setup(sv => sv.FindById("1")).Returns(new IdentityUser() );
+
+        var createBookingDto = new CreateBookingDTO {
+            CheckIn = new DateTime(2000, 01, 01),
+            CheckOut = new DateTime(2000, 01, 02),
+            UserId = "1",
+            RoomId = room.Id.ToString()
+        };
+        Assert.Throws<Exception>(() => bookingService.Book(createBookingDto));
+    }
+
+    [Fact]
+    public void Book_ShouldCreateAndAddBooking_WhenRoomIsAvailable()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        var room = new Room { Id = 1 };
+        bookingRepositoryMock.Setup(repo => repo.GetBookingsByRoomId(room.Id))
+            .Returns(new List<Booking>());
+        bookingRepositoryMock.Setup(repo => repo.Add(It.IsAny<Booking>()))
+            .Callback(() => { });
+        roomServiceMock.Setup(sv => sv.FindRoomById(room.Id.ToString()))
+            .Returns(room);
+        userServiceMock.Setup(sv => sv.FindById("1")).Returns(new IdentityUser());
+
+
+        var createBookingDto = new CreateBookingDTO
+        {
+            CheckIn = new DateTime(2000, 01, 01),
+            CheckOut = new DateTime(2000, 01, 02),
+            UserId = "1",
+            RoomId = room.Id.ToString()
+        };
+        bookingService.Book(createBookingDto);
+        bookingRepositoryMock.Verify(repo => repo.Add(It.IsAny<Booking>()), Times.Once());
+    }
+
+    [Fact]
+    public void CancelBooking_ShouldThrowException_WhenBookingIsNotFound()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        bookingRepositoryMock.Setup(repo => repo.GetById(It.IsAny<long>())).Returns((Booking)null);
+
+        Assert.Throws<Exception>(() => bookingService.CancelBooking(1));
+    }
+
+    [Fact]
+    public void CancelBooking_ShouldDeleteBookingFromRepo_WhenBookingExists()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        var existentBooking = new Booking();
+        bookingRepositoryMock.Setup(repo => repo.GetById(It.IsAny<long>())).Returns(existentBooking);
+
+        bookingService.CancelBooking(1);
+        bookingRepositoryMock.Verify(repo => repo.Delete(existentBooking), Times.Once());
     }
 }
