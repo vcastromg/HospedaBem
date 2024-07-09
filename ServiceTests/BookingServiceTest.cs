@@ -10,6 +10,14 @@ namespace ServiceTests;
 
 public class BookingServiceTest
 {
+    private Mock<UserManager<AppUser>> userManagerMock;
+
+    public BookingServiceTest()
+    {
+        var store = new Mock<IUserStore<AppUser>>();
+        this.userManagerMock = new Mock<UserManager<AppUser>>(store.Object, null, null, null, null, null, null, null, null); // What on earth is this?!
+    }
+
     [Fact]
     public void CheckRoomAvailabilityWithinPeriod_ShouldReturnTrue_IfThereAreNoBookings()
     {
@@ -17,11 +25,8 @@ public class BookingServiceTest
         var roomServiceMock = new Mock<RoomService>();
         var userServiceMock = new Mock<AppUserService>();
 
-        var store = new Mock<IUserStore<AppUser>>();
-        var userManagerMock = new Mock<UserManager<AppUser>>(store.Object, null, null, null, null, null, null, null, null); // What on earth is this?!
-
         var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
-                                                   userServiceMock.Object, userManagerMock.Object);
+                                                   userServiceMock.Object, this.userManagerMock.Object);
         long roomId = 1;
         var room = new Room { Id = roomId };
         bookingRepositoryMock.Setup(repo => repo.GetBookingsByRoomId(roomId)).Returns(new List<Booking>());
