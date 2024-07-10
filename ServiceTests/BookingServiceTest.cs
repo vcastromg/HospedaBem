@@ -238,4 +238,94 @@ public class BookingServiceTest
         bookingService.CancelBooking(1);
         bookingRepositoryMock.Verify(repo => repo.Delete(existentBooking), Times.Once());
     }
+
+    [Fact]
+    public void UpdateBookingPeriod_ShouldThrowException_IfBookingIsNotFound()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        bookingRepositoryMock.Setup(repo => repo.GetBookingById(It.IsAny<long>()))
+            .Returns((Booking)null);
+        
+        Assert.Throws<Exception>(() => bookingService.UpdateBookingPeriod(1, new DateTime(), new DateTime()));
+    }
+
+    [Fact]
+    public void UpdateBookingPeriod_ShouldThrowException_IfRoomIsNotAvailableWithinPeriod()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        var booking = new Booking
+        {
+            CheckIn = new DateTime(2000, 01, 01),
+            CheckOut = new DateTime(2000, 01, 02),
+            Room = new Room(),
+            User = new IdentityUser()
+        };
+        bookingRepositoryMock.Setup(repo => repo.GetBookingById(1))
+            .Returns(booking);
+        bookingRepositoryMock.Setup(repo => repo.GetBookingsByRoomId(1))
+            .Returns(new List<Booking>(){booking});
+
+        // attempt to update to same dates ensures that it is not available
+        Assert.Throws<Exception>(() => bookingService.UpdateBookingPeriod(1, booking.CheckIn, booking.CheckOut));
+    }
+
+    [Fact]
+    public void UpdateBookingPeriod_ShouldUpdateBookingInDatabase_IfItAllChecks()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        var booking = new Booking
+        {
+            CheckIn = new DateTime(2000, 01, 01),
+            CheckOut = new DateTime(2000, 01, 02),
+            Room = new Room(),
+            User = new IdentityUser()
+        };
+
+        var newCheckIn = new DateTime(2000, 01, 03);
+        var newCheckOut = new DateTime(2000, 01, 04);
+
+        bookingRepositoryMock.Setup(repo => repo.GetBookingById(1))
+            .Returns(booking);
+        bookingRepositoryMock.Setup(repo => repo.GetBookingsByRoomId(1))
+            .Returns(new List<Booking>() { booking });
+        bookingRepositoryMock.Setup(repo => repo.Update(It.IsAny<Booking>()))
+            .Callback((Booking booking_) =>
+                      Assert.True(booking_.CheckIn == newCheckIn && booking_.CheckOut == newCheckOut));
+
+        bookingService.UpdateBookingPeriod(1, newCheckIn, newCheckOut);
+    }
+
+    [Fact]
+    public void FindBookingById_ShouldThrowException_IfBookingDoesNotExist()
+    {
+        var bookingRepositoryMock = new Mock<BookingRepository>();
+        var roomServiceMock = new Mock<RoomService>();
+        var userServiceMock = new Mock<AppUserService>();
+
+        var bookingService = new BookingServiceImp(bookingRepositoryMock.Object, roomServiceMock.Object,
+                                                   userServiceMock.Object, this.userManagerMock.Object);
+
+        bookingRepositoryMock.Setup(repo => repo.GetBookingById(It.IsAny<long>()))
+            .Returns((Booking)null);
+
+        Assert.Throws<Exception>(() => bookingService.FindBookingById("1"));
+    }
 }
