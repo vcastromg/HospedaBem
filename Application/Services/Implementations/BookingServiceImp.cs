@@ -57,11 +57,7 @@ public class BookingServiceImp : BookingService
 
     public void UpdateBookingPeriod(long bookingId, DateTime checkIn, DateTime checkOut)
     {
-        var booking = _bookingRepository.GetById(bookingId);
-        if (booking == null)
-        {
-            throw new Exception("Booking not found");
-        }
+        var booking = FindBookingById(bookingId.ToString());
 
         if (!CheckRoomAvailabilityWithinPeriod(bookingId, checkIn, checkOut))
         {
@@ -105,6 +101,6 @@ public class BookingServiceImp : BookingService
 
     public IEnumerable<Booking> FindBookingsByUser(string userId)
     {
-        return _bookingRepository.GetBookingsbyUser(userId);;
+        return _bookingRepository.GetBookingsbyUser(userId);
     }
 }
